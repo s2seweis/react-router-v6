@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Navigate, Link } from "react-router-dom";
 
 const Login = (props) => {
   // console.log("line:200", props);
@@ -12,8 +13,8 @@ const Login = (props) => {
 
         <p>User Routes</p>
         <div style={{display: 'grid'}}>
-          <a href="/landing">Landing</a>
-          <a href="/start">Start</a>
+          <Link to="/landing">Landing</Link>
+          <Link to="/start">Start</Link>
         </div>
         <button onClick={props.handleLoginPublic} style={{marginTop:"20px"}} >SignIn User Routes</button>
         <button onClick={props.handleLogoutPublic}>SignOut User Routes</button>
@@ -21,8 +22,8 @@ const Login = (props) => {
 
         <p style={{marginTop:"50px"}}>Private Routes</p>
         <div style={{display: 'grid'}}>
-          <a href="/home">Home</a>
-          <a href="/products">Products</a>
+          <Link to="/home">Home</Link>
+          <Link to="/products">Products</Link>
         </div>
         < button onClick={props.handleLoginPrivate} style={{marginTop:"20px"}}>SignIn Private Routes</button>
         <button onClick={props.handleLogoutPrivate}>SignOut Private Routes</button>

@@ -40,7 +40,7 @@ function App() {
         <Router>
           <Routes>
             <Route  element={<PublicRoutes user={publicUser} />}>
-                <Route element={<Start/>} user={publicUser} path="/start" exact/>
+                <Route element={<Start/>} user={publicUser} path="/start" />
                 <Route element={<Landing/>} user={publicUser} path="/landing"/>
             </Route>
             <Route element={<PrivateRoutes user={privateUser} />}>
@@ -56,8 +56,8 @@ function App() {
 
             <Route 
             element={<Login  
-            // publicUser={publicUser.toString()}
-            // privateUser={privateUser.toString()}
+            publicUser={publicUser.toString()}
+            privateUser={privateUser.toString()}
             handleLoginPublic={handleLoginPublic}
             handleLogoutPublic={handleLogoutPublic}
             handleLoginPrivate={handleLoginPrivate}
