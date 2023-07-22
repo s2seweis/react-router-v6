@@ -66,7 +66,7 @@ function App() {
           }
 
           exact
-          path="/login"
+          path="/"
           // handleLoginPublic={handleLoginPublic}
           // handleLogoutPublic={handleLogoutPublic}
           // handleLoginPrivate={handleLoginPrivate}
