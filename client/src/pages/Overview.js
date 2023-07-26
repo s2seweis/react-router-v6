@@ -2,14 +2,17 @@ import React, {useState} from 'react';
 import { Navigate, Link } from "react-router-dom";
 
 const Login = (props) => {
-  // console.log("line:200", props);
+  console.log("line:200", props);
 
 
   return (
     <div>
       <div>
         <p>Public Routes</p>
+        <div style={{display:'grid'}}>
         <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        </div>
 
         <p>User Routes</p>
         <div style={{display: 'grid'}}>

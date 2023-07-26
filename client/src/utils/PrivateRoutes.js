@@ -1,17 +1,17 @@
 import { Outlet, Navigate } from 'react-router-dom'
 
-const PublicRoutes = (user) => {
-    console.log("line:10", user);
-    console.log("line:10", user.user);
+const PrivateRoutes = (user) => {
     // let : declare a variable that is block scoped in JavaScript
-    let auth = {'token':true}
+    let auth = {'token':false}
+    console.log( "line:11", user);
+    console.log( "line:12", user.user);
     console.log( "line:1", auth);
     console.log( "line:2", auth.token);
     return(
         user.user ? <Outlet/> 
-        : <Navigate to="/login"/>
+        : <Navigate to="/"/>
         // : <Outlet/> 
     )
 }
 
-export default PublicRoutes
+export default PrivateRoutes
