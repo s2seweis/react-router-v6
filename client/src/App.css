@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.text-left{
+  text-align: left;
+}
+
+.login{
+  min-height: 100vh;
+  background-color: black;
+}
+
+.login label, .login h1 {
+  color: white !important;
+}
