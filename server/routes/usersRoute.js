@@ -42,4 +42,14 @@ router.get("/getallusers", async (req, res) => {
     }
   });
 
+  router.post("/deleteuser", async (req, res) => {
+    try {
+      await User.findOneAndDelete({ _id: req.body.userid });
+  
+      res.send("User deleted successfully");
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+  });
+
 module.exports = router

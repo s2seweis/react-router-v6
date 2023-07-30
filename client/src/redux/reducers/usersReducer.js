@@ -14,12 +14,12 @@ export const usersReducer = (state=initialData , action)=>{
              }
          }
 
-         case 'GET_ALL_USERS' : {
-            return{
-                ...state,
-                users : action.payload
-            }
-        }
+        //  case 'GET_ALL_USERS' : {
+        //     return{
+        //         ...state,
+        //         users : action.payload
+        //     }
+        // }
          
          default:return state
      }

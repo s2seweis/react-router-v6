@@ -27,21 +27,21 @@ import {useDispatch, useSelector} from 'react-redux';
 function App () {
 
   const {users} = useSelector(state=>state.usersReducer)
-  console.log("line:100", users.role);
+  // console.log("line:100", users.role);
 
   const userRole = users.role || "guest";
-  console.log("line:101", userRole);
+  // console.log("line:101", userRole);
 
 
 
 
   const user = users.userauth || false;
-  console.log("line:101.1",users.userauth);
+  // console.log("line:101.1",users.userauth);
 
 
 
   const admin = users.adminauth || false;
-  console.log("line:102", users.adminauth);
+  // console.log("line:102", users.adminauth);
 
   
   
@@ -50,9 +50,9 @@ function App () {
 
 
   const [publicUser, setPublicUser] = useState (user);
-  console.log ('line:103', publicUser);
+  // console.log ('line:103', publicUser);
   const [privateUser, setPrivateUser] = useState (admin);
-  console.log ('line:104', privateUser);
+  // console.log ('line:104', privateUser);
 
   const handleLoginPublic = e => {
     e.preventDefault ();

@@ -1,13 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getAllUsers} from '../redux/actions/userActions';
+import {getAllUsers, deleteUser} from '../redux/actions/displayUserActions';
 import {Col, Row, Divider, DatePicker, Checkbox} from 'antd';
-// import {Link} from 'react-router-dom';
+
+// ###
+import {Link} from 'react-router-dom';
+import { Popconfirm, message } from "antd";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+
+// ###
 import Spinner from '../components/Spinner';
 
 function UserRoles () {
-  const {users} = useSelector (state => state.usersReducer);
-  console.log("line:200", users);
+  const {users1} = useSelector (state => state.displayUsersReducer);
+  console.log("line:200", users1);
 
   const {loading} = useSelector (state => state.alertsReducer);
 
@@ -21,9 +27,9 @@ function UserRoles () {
 
   useEffect (
     () => {
-      setTotalUsers (users);
+      setTotalUsers (users1);
     },
-    [users]
+    [users1]
   );
 
   return (
@@ -35,7 +41,7 @@ function UserRoles () {
 
       <Row style={{columnGap:"20px", marginTop:"20px"}} justify="center" gutter={16}>
 
-        {totalUsers.map (user => {
+        {totalUsers?.map (user => {
           return (
             <Col style={{background:"aliceblue", padding:"10px"}}
             >
@@ -54,6 +60,29 @@ function UserRoles () {
                     <h4>Id:</h4>
                     <p>{user._id}</p>
                   </div>
+
+                  {/* ### */}
+                  <div className="mr-4" style={{display:"flex", justifyContent:"space-around"}}>
+                    <Link to={`/editcar/${user._id}`}>
+                      <EditOutlined
+                        className="mr-3"
+                        style={{ color: "green", cursor: "progress" }}
+                        />
+                    </Link>
+
+                    <Popconfirm
+                      title="Are you sure to delete this car?"
+                      onConfirm={()=>{dispatch(deleteUser({userid : user._id}))}}
+                      
+                      okText="Yes"
+                      cancelText="No"
+                      >
+                      <DeleteOutlined
+                        style={{ color: "red", cursor: "progress" }}
+                        />
+                    </Popconfirm>
+                  </div>
+                        {/* ### */}
 
                
 

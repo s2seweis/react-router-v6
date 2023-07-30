@@ -8,11 +8,14 @@ import { alertsReducer } from './reducers/alertsReducer';
 
 import { usersReducer } from './reducers/usersReducer';
 
+import { displayUsersReducer } from './reducers/displayUsersReducer';
+
 
 
 const rootReducer = combineReducers({
    alertsReducer,
-   usersReducer
+   usersReducer,
+   displayUsersReducer
 })
 
 

@@ -6,8 +6,8 @@ const Login = props => {
   // console.log("line:200", props);
 
   const {users} = useSelector(state=>state.usersReducer)
-  console.log("line:107", users.username);
-  // console.log("line:107", users.auth);
+  console.log("line:107", users);
+  // // console.log("line:107", users.auth);
 
   let text = users.username || "GUEST"
   let result = text.toUpperCase();
