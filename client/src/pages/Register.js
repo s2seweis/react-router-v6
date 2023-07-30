@@ -1,54 +1,70 @@
 import React from 'react';
-import { Row, Col, Input, Form } from 'antd';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { userRegister } from '../redux/actions/userActions';
+import {Row, Col, Input, Form} from 'antd';
+import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {userRegister} from '../redux/actions/userActions';
 import Spinner from '../components/Spinner';
-
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-AOS.init();
+AOS.init ();
 
-function Register() {
+function Register () {
+  const dispatch = useDispatch ();
+  const {loading} = useSelector (state => state.alertsReducer);
 
-  const dispatch = useDispatch()
-  const { loading } = useSelector(state => state.alertsReducer)
-
-
-  function onFinish(values) {
-    dispatch(userRegister(values))
-    console.log("line:3", values);
+  function onFinish (values) {
+    dispatch (userRegister (values));
+    console.log ('line:3', values);
   }
 
-
   return (
-    <div className="login">
-      {loading && (<Spinner />)}
-      <Row style={{ marginTop: "100px" }} gutter={16} className="d-flex aligin-items-center">
+    <div className="login" style={{margin:"100px", padding:"20px"}}>
+      {loading && <Spinner />}
+      <Row
+        gutter={16}
+        className="d-flex aligin-items-center"
+      >
 
+        <Col lg={8} />
 
-        <Col lg={8}></Col>
-
-        <Col style={{marginTop:"100px"}} lg={8} className="text-left p-5">
-        <Form layout="vertical" className='login-form p-5' onFinish={onFinish}>
+        <Col 
+        // style={{marginTop: '100px'}} 
+        lg={8} className="text-left p-5">
+          <Form
+            layout="vertical"
+            className="login-form p-5"
+            onFinish={onFinish}
+          >
             <h1>Register</h1>
-            <hr/>
-            <Form.Item name="username" label="Username" rules={[{required: true}]}>
+            <hr />
+            <Form.Item
+              name="username"
+              label="Username"
+              rules={[{required: true}]}
+            >
               <Input />
             </Form.Item>
-            <Form.Item name="password" label="Password" rules={[{required: true}]}>
+            <Form.Item
+              name="password"
+              label="Password"
+              rules={[{required: true}]}
+            >
               <Input />
             </Form.Item>
-            <Form.Item name="cpassword" label="Confirm Password" rules={[{required: true}]}>
+            <Form.Item
+              name="cpassword"
+              label="Confirm Password"
+              rules={[{required: true}]}
+            >
               <Input />
             </Form.Item>
 
-            <button className='btn1 mt-2 mb-3'>Register</button>
+            <button style={{marginBottom:"15px"}}  className="btn1 mt-2 mb-3">Register</button>
 
-            <br></br>
+            <br />
 
-            <Link to="/login" >Click here to Login</Link>
+            <Link  to="/login">Click here to Login</Link>
 
           </Form>
         </Col>

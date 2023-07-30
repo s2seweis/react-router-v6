@@ -8,8 +8,8 @@ export const userLogin = (reqObj) => async dispatch => {
 
     try {
         const response = await axios.post('/api/users/login', reqObj)
-        // console.log("line:101",response );
-        // console.log("line:101",response.data );
+        console.log("line:101",response );
+        console.log("line:102",response.data );
         localStorage.setItem('user', JSON.stringify(response.data))
         dispatch({type: 'GET_USERS', payload:response.data})
         message.success('Login Success')
@@ -20,7 +20,7 @@ export const userLogin = (reqObj) => async dispatch => {
         }, 500);
     } catch (error) {
         console.log("line:4",);
-        message.error('Something went wrong, really?')
+        message.error('Something went wrong, Password or Username is incorrect! ')
         dispatch({type: 'LOADING', payload: false})
     }
 }
@@ -46,3 +46,21 @@ export const userRegister = (reqObj) => async dispatch => {
         dispatch({type: 'LOADING', payload: false})
     }
 }
+
+// ###
+
+export const getAllUsers=()=>async dispatch=>{
+    
+    dispatch({type: 'LOADING' , payload:true})
+    
+    try {
+        const response = await axios.get('/api/users/getallusers')
+        dispatch({type: 'GET_ALL_USERS', payload:response.data})
+        dispatch({type: 'LOADING' , payload:false})
+    } catch (error) {
+        console.log(error)
+        dispatch({type: 'LOADING' , payload:false})
+    }    
+}
+// ###
+

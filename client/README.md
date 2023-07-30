@@ -11,3 +11,5 @@
 2. Let the Auth run via MongoDB
 3. Using of an Auth Token 
 4. Adjust the CSS and HTML
+
+Now: 

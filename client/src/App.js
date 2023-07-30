@@ -1,9 +1,10 @@
 import './App.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Home from './pages/Home';
-import Products from './pages/Products';
+import Admin from './pages/Admin';
+import UserRoles from './pages/UserRoles';
+import Settings from './pages/Settings';
 import Start from './pages/Start';
-import Landing from './pages/Landing';
+import Products from './pages/Products';
 import Login from './pages/Login';
 // ###
 import Overview from './pages/Overview';
@@ -13,12 +14,45 @@ import 'antd/dist/antd.min.css';
 import PrivateRoutes from './utils/PrivateRoutes';
 import PublicRoutes from './utils/PublicRoutes';
 import React, {useState} from 'react';
+// ###
+
+import {useDispatch, useSelector} from 'react-redux';
+
+
+// ###
+
+
+
 
 function App () {
-  const [publicUser, setPublicUser] = useState (false);
-  console.log ('line:3', publicUser);
-  const [privateUser, setPrivateUser] = useState (false);
-  console.log ('line:4', privateUser);
+
+  const {users} = useSelector(state=>state.usersReducer)
+  console.log("line:100", users.role);
+
+  const userRole = users.role || "guest";
+  console.log("line:101", userRole);
+
+
+
+
+  const user = users.userauth || false;
+  console.log("line:101.1",users.userauth);
+
+
+
+  const admin = users.adminauth || false;
+  console.log("line:102", users.adminauth);
+
+  
+  
+
+
+
+
+  const [publicUser, setPublicUser] = useState (user);
+  console.log ('line:103', publicUser);
+  const [privateUser, setPrivateUser] = useState (admin);
+  console.log ('line:104', privateUser);
 
   const handleLoginPublic = e => {
     e.preventDefault ();
@@ -44,11 +78,12 @@ function App () {
         <Routes>
           <Route element={<PublicRoutes user={publicUser} />}>
             <Route element={<Start />} user={publicUser} path="/start" />
-            <Route element={<Landing />} user={publicUser} path="/landing" />
+            <Route element={<Products />} user={publicUser} path="/products" />
           </Route>
           <Route element={<PrivateRoutes user={privateUser} />}>
-            <Route element={<Home />} path="/home" exact />
-            <Route element={<Products />} path="/products" />
+            <Route element={<Admin/>} path="/admin" exact />
+            <Route element={<Settings />} path="/settings" />
+            <Route element={<UserRoles />} path="/settings/roles" />
           </Route>
 
           {/* <Route  element={<Login/>} path="/login"/> */}

@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,10 +42,13 @@
 }
 
 .login{
-  min-height: 100vh;
-  background-color: black;
+  /* min-height: 100vh; */
+  height: auto;
+  /* background-color: black; */
+  padding: 10px;
 }
 
 .login label, .login h1 {
-  color: white !important;
+  color: red !important;
+  /* color: white !important; */
 }
