@@ -43,3 +43,50 @@ export const deleteUser=(reqObj)=>async dispatch=>{
 }
 // ###
 
+export const addUser=(reqObj)=>async dispatch=>{
+
+
+    dispatch({type: 'LOADING' , payload:true})
+
+    try {
+         await axios.post('/api/users/adduser' , reqObj)
+       
+         dispatch({type: 'LOADING' , payload:false})
+         message.success('New user added successfully')
+         setTimeout(() => {
+            window.location.href='/'
+         }, 500);
+    } catch (error) {
+        console.log(error)
+        dispatch({type: 'LOADING' , payload:false})
+    }
+      
+
+}
+
+
+
+export const editUser=(reqObj)=>async dispatch=>{
+
+    console.log("line:55", reqObj);
+
+    dispatch({type: 'LOADING' , payload:true})
+
+    try {
+         await axios.post('/api/users/edituser' , reqObj)
+       
+         dispatch({type: 'LOADING' , payload:false})
+         message.success('User details updated successfully')
+        //  setTimeout(() => {
+        //     window.location.href='/'
+        //  }, 500);
+    } catch (error) {
+        console.log(error)
+        dispatch({type: 'LOADING' , payload:false})
+    }
+      
+
+}
+
+
+

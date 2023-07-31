@@ -63,7 +63,7 @@ function UserRoles () {
 
                   {/* ### */}
                   <div className="mr-4" style={{display:"flex", justifyContent:"space-around"}}>
-                    <Link to={`/editcar/${user._id}`}>
+                    <Link to={`/edituser/${user._id}`}>
                       <EditOutlined
                         className="mr-3"
                         style={{ color: "green", cursor: "progress" }}

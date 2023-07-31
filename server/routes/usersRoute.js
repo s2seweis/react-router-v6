@@ -8,7 +8,7 @@ router.post("/login", async(req, res) =>{
 
     try {
         const user = await User.findOne({username, password})
-        console.log("line:103", user);
+        // console.log("line:103", user);
         if(user) {
             res.send(user)
         }
@@ -52,4 +52,40 @@ router.get("/getallusers", async (req, res) => {
     }
   });
 
+  // ###
+
+
+  router.post("/adduser", async (req, res) => {
+    try {
+      const newuser = new User(req.body);
+      await newuser.save();
+      res.send("User added successfully");
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+  });
+  
+  router.post("/edituser", async (req, res) => {
+    try {
+      const user = await User.findOne({ _id: req.body._id });
+      console.log("line:56", user);
+      user.username = req.body.username;
+      console.log("line:57", user.username);
+      user.image = req.body.image;
+      user.fuelType = req.body.fuelType;
+      user.rentPerHour = req.body.rentPerHour;
+      user.capacity = req.body.capacity;
+  
+      await user.save();
+  
+      res.send("User details updated successfully");
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+  });
+
+
+  // ###
+
 module.exports = router
+

@@ -17,9 +17,8 @@ import React, {useState} from 'react';
 // ###
 
 import {useDispatch, useSelector} from 'react-redux';
-
-
 // ###
+import EditUser from './pages/EditUser';
 
 
 
@@ -84,6 +83,7 @@ function App () {
             <Route element={<Admin/>} path="/admin" exact />
             <Route element={<Settings />} path="/settings" />
             <Route element={<UserRoles />} path="/settings/roles" />
+            <Route element={<EditUser />} path="/edituser/:userid" />
           </Route>
 
           {/* <Route  element={<Login/>} path="/login"/> */}
