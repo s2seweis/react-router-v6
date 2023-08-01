@@ -58,6 +58,7 @@ router.get("/getallusers", async (req, res) => {
   router.post("/adduser", async (req, res) => {
     try {
       const newuser = new User(req.body);
+      console.log("line:59", newuser);
       await newuser.save();
       res.send("User added successfully");
     } catch (error) {

@@ -39,6 +39,10 @@ function UserRoles() {
         <a href="javascript:history.back()">Go Back</a>
       </div>
 
+      <button className="btn1">
+        <a href="/adduser">ADD USER</a>
+      </button>
+
 
 
       {/* {loading == true && <Spinner />} */}

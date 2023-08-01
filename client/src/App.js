@@ -22,6 +22,8 @@ import EditUser from './pages/EditUser';
 // ###
 import Animation from './pages/Animation';
 // ###
+import AddUser from './pages/AddUser';
+// ###
 
 
 
@@ -87,6 +89,7 @@ function App () {
             <Route element={<Settings />} path="/settings" />
             <Route element={<UserRoles />} path="/settings/roles" />
             <Route element={<EditUser />} path="/edituser/:userid" />
+            <Route element={<AddUser />} path="/adduser" />
           </Route>
 
           {/* <Route  element={<Login/>} path="/login"/> */}
