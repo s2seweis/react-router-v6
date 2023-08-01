@@ -11,5 +11,6 @@
 2. Let the Auth run via MongoDB
 3. Using of an Auth Token 
 4. Adjust the CSS and HTML
+5. Github/ Working on 2 different work places/ Manage it better!
 
 Now: 

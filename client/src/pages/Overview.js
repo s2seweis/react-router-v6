@@ -20,6 +20,7 @@ const Login = props => {
           <a href="/login">Login</a>
           <a href="/register">Register</a>
           <a href="/">Overview</a>
+          <a href="/animation">Animation</a>
         </div>
 
         <hr />

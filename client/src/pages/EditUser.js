@@ -54,9 +54,13 @@ function EditUser({match}) {
     <div
     // users={users}
     >
+      <div style={{margin:"15px 0px 0px 15px", display:"flex"}}>
+      <a  href="javascript:history.back()">Go Back</a>
+      </div>
+
       {loading && <Spinner />}
-      <Row justify="center mt-5">
-        <Col lg={12} sm={20} xs={22} className="p-2">
+      <Row justify="center mt-5" style={{marginTop:"25px"}}>
+        <Col style={{background:"aliceblue", borderRadius:"10px"}} lg={12} sm={20} xs={22} className="p-2">
           {totalusers.length > 0 &&
             <Form
               initialValues={user}

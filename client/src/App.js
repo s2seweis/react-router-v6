@@ -19,6 +19,9 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 // ###
 import EditUser from './pages/EditUser';
+// ###
+import Animation from './pages/Animation';
+// ###
 
 
 
@@ -107,6 +110,8 @@ function App () {
 
           <Route element={<Login />} exact path="/login" />
           <Route element={<Register />} exact path="/Register" />
+          <Route element={<Animation />}  path="/animation" />
+
 
         </Routes>
       </Router>
