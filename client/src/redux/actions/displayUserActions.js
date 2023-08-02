@@ -44,6 +44,7 @@ export const deleteUser=(reqObj)=>async dispatch=>{
 // ###
 
 export const addUser=(reqObj)=>async dispatch=>{
+    console.log("line:400", reqObj);
 
 
     dispatch({type: 'LOADING' , payload:true})
@@ -54,7 +55,7 @@ export const addUser=(reqObj)=>async dispatch=>{
          dispatch({type: 'LOADING' , payload:false})
          message.success('New user added successfully')
          setTimeout(() => {
-            window.location.href='/'
+            window.location.href='/settings/roles'
          }, 500);
     } catch (error) {
         console.log(error)

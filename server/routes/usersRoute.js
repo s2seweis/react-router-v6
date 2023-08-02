@@ -74,6 +74,10 @@ router.get("/getallusers", async (req, res) => {
       console.log("line:57", user.username);
       user.password = req.body.password;
       console.log("line:58", user.password);      
+      user.role = req.body.role;
+      console.log("line:58", user.password);      
+      // user.roleNew = req.body.roleNew;
+      // console.log("line:59", user.password);      
       user.fuelType = req.body.fuelType;
       user.rentPerHour = req.body.rentPerHour;
       user.capacity = req.body.capacity;

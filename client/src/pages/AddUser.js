@@ -1,4 +1,4 @@
-import { Col, Row, Form, Input } from 'antd'
+import { Col, Row, Form, Input, Select, Space } from 'antd'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../components/Spinner'
@@ -12,14 +12,18 @@ function AddUser() {
     const { loading } = useSelector(state => state.alertsReducer)
 
     function onFinish(values) {
-        
+
         console.log("line:60", values);
 
         dispatch(addUser(values))
-         console.log(values)
-
-
+        console.log(values)
     }
+
+    // ###
+    const handleChange = (value) => {
+        console.log(`selected ${value}`);
+    };
+    // ###
 
     return (
         <div>
@@ -38,10 +42,22 @@ function AddUser() {
                         <Form.Item name='password' label='Password' rules={[{ required: true }]}>
                             <Input />
                         </Form.Item>
-                        <Form.Item name='role' label='Role' rules={[{ required: true }]}>
+                        {/* <Form.Item name='role' label='Role' rules={[{ required: true }]}>
                             <Input />
+                        </Form.Item> */}
+                        <Form.Item name='role' label='Role' rules={[{ required: true }]}>
+                            <Select
+                                defaultValue=""
+                                // style={{ width: 120 }}
+                                onChange={handleChange}
+                                options={[
+                                    { value: 'user', label: 'User' },
+                                    { value: 'admin', label: 'Admin' },
+                                   
+                                ]}
+                            />
                         </Form.Item>
-                       
+
 
                         <div className='text-right'>
                             <button className='btn1'>ADD USER</button>

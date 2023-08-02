@@ -40,7 +40,8 @@ function UserRoles() {
       </div>
 
       <button className="btn1">
-        <a href="/adduser">ADD USER</a>
+        {/* <a href="/adduser">ADD USER</a> */}
+        <Link to="/adduser">ADD USER</Link>
       </button>
 
 
