@@ -6,20 +6,19 @@ import { editUser, getAllUsers } from '../redux/actions/displayUserActions';
 
 import { useParams } from 'react-router-dom';
 
-// ###
-import EditUserComponent from '../components/user/EditUserComponent';
-// ###
 
-function EditUser({ match }) {
+import EditSettingsComponent from '../components/settings/EditSettingsComponent';
+
+function EditSetting({ match }) {
   
 
   return (
     <div>
 
-      <EditUserComponent/>
+      <EditSettingsComponent/>
    
     </div>
   );
 }
 
-export default EditUser;
+export default EditSetting;

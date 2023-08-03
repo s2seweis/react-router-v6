@@ -13,7 +13,7 @@ router.post("/login", async(req, res) =>{
             res.send(user)
         }
         else {
-            return res.status(400).json(error);
+            return res.status(400,).json(error);
 
         }
     } catch (error) {
