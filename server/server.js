@@ -4,10 +4,11 @@ const port = process.env.PORT || 5000
 const dbConnection = require('./db')
 app.use(express.json());
 
+// ### Route for JWT Authentication
+app.use('/api/users/', require('./routes/usersRoute'))
 
-app.use('/api/users/' , require('./routes/usersRoute'))
 
-app.use('/api/settings/' , require('./routes/settingsRoute'))
+app.use('/api/settings/', require('./routes/settingsRoute'))
 
 
 app.get('/', (req, res) => res.send('Hello World'))

@@ -41,7 +41,7 @@ export const userRegister = (reqObj) => async dispatch => {
         }, 500);
         dispatch({type: 'LOADING', payload: false})
     } catch (error) {
-        message.error('Something went wrong!')
+        message.error('Something went wrong, maybe the email is registered already under an other account!')
         console.log("line:4",);
         dispatch({type: 'LOADING', payload: false})
     }
