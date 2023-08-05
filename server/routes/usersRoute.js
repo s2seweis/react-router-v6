@@ -2,14 +2,15 @@ const express = require("express")
 const router = express.Router();
 const User = require("../models/userModel")
 
-const { currentUser, login, register, getallusers, deleteuser, adduser, edituser } = require("../controllers/userController")
+const { currentUser, login, register, getallusers, deleteuser, adduser, edituser } = require("../controllers/userController");
+const validateToken = require("../middleware/validateTokenHandler");
 
 // ### - import the logic from the controller
 router.post("/login", login);
 // ###
 
 // ### - import the logic from controller
-router.get("/current", currentUser);
+router.get("/current", validateToken, currentUser);
 // ###
 
 // ###
