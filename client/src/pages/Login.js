@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Row, Col, Input, Form} from 'antd';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {userLogin} from '../redux/actions/userActions';
 import Spinner from '../components/Spinner';
+
+// ###
+
+import {getCurrentUser} from '../redux/actions/currentUserAction';
+
+// ###
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -12,11 +18,22 @@ AOS.init ();
 function Login () {
   const dispatch = useDispatch ();
   const {loading} = useSelector (state => state.alertsReducer);
+
   function onFinish (values) {
     dispatch (userLogin (values));
 
     console.log ('line:3', values);
   }
+  function onSubmit () {
+    dispatch (getCurrentUser());
+  }
+
+  // function onclick () {
+  //   dispatch(getCurrentUser)
+  // }
+
+ 
+
   return (
     <div className="login" style={{margin: '100px', padding: '20px'}}>
       {loading && <Spinner />}
@@ -45,8 +62,6 @@ function Login () {
               <Input />
             </Form.Item>
 
-           
-
             <Form.Item
               name="password"
               label="Password"
@@ -68,8 +83,15 @@ function Login () {
 
           </Form>
 
-          <hr style={{marginBottom:"20px"}} />
-          <Link  to="/">Go to Overview without Authentication</Link>
+          {/* ### */}
+          {/* ### Instead of the button the use effect hook should handle to get the current user after the userlogin action was fired */}
+          <button onClick={onSubmit}>
+            Try to get CurrentUser
+          </button>
+          {/* ### */}
+
+          <hr style={{marginBottom: '20px'}} />
+          <Link to="/">Go to Overview without Authentication</Link>
 
         </Col>
 

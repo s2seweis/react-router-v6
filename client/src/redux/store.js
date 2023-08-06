@@ -12,13 +12,18 @@ import { displayUsersReducer } from './reducers/displayUsersReducer';
 
 import { settingsReducer } from './reducers/settingsReducer';
 
+import { currentUserReducer } from './reducers/currentUserReducer';
+
+
+
 
 
 const rootReducer = combineReducers({
    alertsReducer,
    usersReducer,
    displayUsersReducer,
-   settingsReducer
+   settingsReducer,
+   currentUserReducer
 
 })
 
