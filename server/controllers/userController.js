@@ -95,6 +95,8 @@ const login = asyncHandler(async (req, res) => {
             username: user.username,
             email: user.email,
             id: user.id,
+            role: user.role,
+            adminauth: user.adminauth
           },
         },
         process.env.ACCESS_TOKEN_SECRET,

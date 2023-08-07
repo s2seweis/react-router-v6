@@ -5,7 +5,8 @@ import {useDispatch, useSelector} from 'react-redux';
 const Login = props => {
   // console.log("line:200", props);
 
-  const {users} = useSelector(state=>state.usersReducer)
+  // const {users} = useSelector(state=>state.usersReducer)
+  const {users} = useSelector(state=>state.currentUserReducer)
   console.log("line:107", users);
   // // console.log("line:107", users.auth);
 

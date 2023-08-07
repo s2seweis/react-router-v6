@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {message} from 'antd';
+import { getCurrentUser } from './currentUserAction';
 
 export const userLogin = reqObj => async dispatch => {
   dispatch ({type: 'LOADING', payload: true});
@@ -9,9 +10,10 @@ export const userLogin = reqObj => async dispatch => {
   try {
     const response = await axios.post ('/api/users/login', reqObj);
     console.log ('line:101', response);
-    console.log ('line:102', response.data);
-    localStorage.setItem ('user', JSON.stringify (response.data));
+    console.log ('line:102', response.data.accessToken);
+    localStorage.setItem ('user', JSON.stringify (response.data.accessToken));
     dispatch ({type: 'GET_USERS', payload: response.data});
+    dispatch (getCurrentUser(response.data));
     // dispatch ({type: 'GET_CUrrent_USERS', payload: response.data});
     message.success ('Login Success');
     dispatch ({type: 'LOADING', payload: false});
