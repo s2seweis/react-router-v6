@@ -52,3 +52,7 @@
   color: red !important;
   /* color: white !important; */
 }
+
+p{
+  line-break: anywhere;
+}

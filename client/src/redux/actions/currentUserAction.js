@@ -30,9 +30,9 @@ export const getCurrentUser = reqObj => async dispatch => {
     dispatch({ type: 'LOADING', payload: false });
 
     // ### - Comment it Out, no redirect currentliy
-    setTimeout (() => {
-      window.location.href = '/';
-    }, 500);
+    // setTimeout (() => {
+    //   window.location.href = '/';
+    // }, 500);
   } catch (error) {
     console.log('line:4');
     message.error(

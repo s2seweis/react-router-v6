@@ -3,7 +3,7 @@ import {Navigate, Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
 const Login = props => {
-  // console.log("line:200", props);
+  console.log("line:200", props);
 
   // const {users} = useSelector(state=>state.usersReducer)
   const {users} = useSelector(state=>state.currentUserReducer)

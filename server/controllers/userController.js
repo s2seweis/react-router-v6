@@ -128,43 +128,94 @@ const login = asyncHandler(async (req, res) => {
 
 // #new
 
-const register = asyncHandler (async (req, res) => {
-  const {username, email, password} = req.body;
-  console.log ('line:1', username, email, password);
+// #####
 
+const adduser = asyncHandler (async (req, res) => {
+  const {username, email, password, role, adminauth} = req.body;
+  console.log ('line:1', username, email, password, role, adminauth);
+  
   if (!username || !email || !password) {
     res.status (400);
     throw new Error ('All fields are mandatory');
   }
-
+  
   const userAvailable = await User.findOne ({email});
   if (userAvailable) {
     res.status (400);
     throw new Error ('User already registered!');
   }
-
+  
   //Hash Password
   const hashedPassword = await bcrypt.hash (password, 10);
   console.log ('line:2', hashedPassword);
-
+  
   const user = await User.create ({
     username,
     email,
     password: hashedPassword,
+    role,
+    adminauth
   });
-
+  
   // ### - here the use of backtick is correct
   console.log ('line:3', `${user}`);
-
+  
   if (user) {
     res.status (201).json ({_id: user.id, email: user.email});
   } else {
     res.status (400);
     throw new Error ('User data is not valid');
   }
-
+  
   res.json ({message: 'Register the user'});
 });
+
+// #####
+
+// #####
+
+const register = asyncHandler (async (req, res) => {
+  const {username, email, password} = req.body;
+  console.log ('line:1', username, email, password);
+  
+  if (!username || !email || !password) {
+    res.status (400);
+    throw new Error ('All fields are mandatory');
+  }
+  
+  const userAvailable = await User.findOne ({email});
+  if (userAvailable) {
+    res.status (400);
+    throw new Error ('User already registered!');
+  }
+  
+  //Hash Password
+  const hashedPassword = await bcrypt.hash (password, 10);
+  console.log ('line:2', hashedPassword);
+  
+  const user = await User.create ({
+    username,
+    email,
+    password: hashedPassword,
+  });
+  
+  // ### - here the use of backtick is correct
+  console.log ('line:3', `${user}`);
+  
+  if (user) {
+    res.status (201).json ({_id: user.id, email: user.email});
+  } else {
+    res.status (400);
+    throw new Error ('User data is not valid');
+  }
+  
+  res.json ({message: 'Register the user'});
+});
+
+// #####
+
+
+
 
 //@desc Get All User
 //@route GET /api/users/getallusers
@@ -192,20 +243,22 @@ const deleteuser = asyncHandler (async (req, res) => {
 });
 
 //@desc Add User
+//@desc Not working at the moment!!!
 //@route POST /api/users/adduser
 
-const adduser = asyncHandler (async (req, res) => {
-  try {
-    const newuser = new User (req.body);
-    console.log ('line:4', newuser);
-    await newuser.save ();
-    res.send ('User added successfully');
-  } catch (error) {
-    return res.status (400).json (error);
-  }
-});
+// const adduser = asyncHandler (async (req, res) => {
+//   try {
+//     const newuser = new User (req.body);
+//     console.log ('line:4', newuser);
+//     await newuser.save ();
+//     res.send ('User added successfully');
+//   } catch (error) {
+//     return res.status (400).json (error);
+//   }
+// });
 
 //@desc Edit User
+//@desc Not working at the moment!!!
 //@route POST /api/users/edituser
 
 const edituser = asyncHandler (async (req, res) => {
@@ -217,7 +270,7 @@ const edituser = asyncHandler (async (req, res) => {
     user.password = req.body.password;
     console.log ('line:7', user.password);
     user.role = req.body.role;
-    console.log ('line:8', user.password);
+    console.log ('line:8', user.role);
     // user.roleNew = req.body.roleNew;
     // console.log("line:59", user.password);
     user.fuelType = req.body.fuelType;

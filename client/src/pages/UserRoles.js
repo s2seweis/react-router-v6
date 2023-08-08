@@ -48,7 +48,7 @@ function UserRoles() {
 
       {/* {loading == true && <Spinner />} */}
 
-      <Row style={{ columnGap: "20px", marginTop: "20px" }} justify="center" gutter={16}>
+      <Row style={{ columnGap: "20px", marginTop: "20px", margin:"20px" }} justify="center" gutter={16}>
 
         {totalUsers?.map(user => {
           return (

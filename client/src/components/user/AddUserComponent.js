@@ -39,6 +39,9 @@ function AddUserComponent() {
                         <Form.Item name='username' label='User name' rules={[{ required: true }]}>
                             <Input />
                         </Form.Item>
+                        <Form.Item name='email' label='User email' rules={[{ required: true }]}>
+                            <Input />
+                        </Form.Item>
                         <Form.Item name='password' label='Password' rules={[{ required: true }]}>
                             <Input />
                         </Form.Item>
@@ -53,6 +56,18 @@ function AddUserComponent() {
                                 options={[
                                     { value: 'user', label: 'User' },
                                     { value: 'admin', label: 'Admin' },
+                                   
+                                ]}
+                            />
+                        </Form.Item>
+                        <Form.Item name='adminauth' label='AdminAuth' rules={[{ required: true }]}>
+                            <Select
+                                defaultValue=""
+                                // style={{ width: 120 }}
+                                onChange={handleChange}
+                                options={[
+                                    { value: 'true', label: 'True' },
+                                    { value: 'false', label: 'False' },
                                    
                                 ]}
                             />
