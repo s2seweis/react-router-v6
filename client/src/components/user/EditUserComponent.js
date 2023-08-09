@@ -15,7 +15,7 @@ function EditUserComponent({ match }) {
   // console.log("line:321", id);
 
   let { userid } = useParams();
-  console.log('line:322', userid);
+  console.log('line:300', userid);
 
   const { users1 } = useSelector(state => state.displayUsersReducer);
   console.log('line:301', users1);
@@ -24,7 +24,7 @@ function EditUserComponent({ match }) {
   const dispatch = useDispatch();
   const { loading } = useSelector(state => state.alertsReducer);
   const [user, setuser] = useState();
-  console.log('line:322', user);
+  console.log('line:302', user);
   const [totalusers, settotalusers] = useState([]);
 
   //   const {users} = useSelector (state => state.usersReducer);
@@ -37,7 +37,7 @@ function EditUserComponent({ match }) {
       } else {
         settotalusers(users1);
         setuser(users1.find(o => o._id == userid));
-        console.log('line:5000', user);
+        console.log('line:303', user);
       }
     },
     [users1]
@@ -47,14 +47,19 @@ function EditUserComponent({ match }) {
     values._id = user._id;
 
     dispatch(editUser(values));
-    console.log("line:505", values);
+    console.log("line:304", values);
   }
 
-   // ###
-   const handleChange = (value) => {
-    console.log(`selected ${value}`);
-};
-// ###
+  // ###
+  const handleChange = (value) => {
+    console.log("line:305", value);
+  };
+  // const handleChange2 = (value) => {
+  //   console.log("line:306", value);
+  // };
+  // ###
+
+  // console.log("line:305", user.adminauth);
 
   return (
     <div
@@ -73,9 +78,9 @@ function EditUserComponent({ match }) {
               className="bs1 p-2"
               layout="vertical"
               onFinish={onFinish}
-              style={{ marginTop: "50px", background:"aliceblue", padding:"15px", borderRadius:"15px"}}
+              style={{ marginTop: "50px", background: "aliceblue", padding: "15px", borderRadius: "15px" }}
             >
-              <h3>Edit User</h3>
+              <h3>Edit User1</h3>
 
               <hr />
               <Form.Item
@@ -102,29 +107,64 @@ function EditUserComponent({ match }) {
                 <Input />
               </Form.Item>
 
-             {/* ' <Form.Item
+          
+
+               {/* <Form.Item
                 name="role"
                 label="Role"
-                rules={[{ required: true }]}
+                // rules={[{ required: true }]}
               >
                 <Input />
               </Form.Item>' */}
 
-              <Form.Item name='role' label='Role' rules={[{ required: true }]}>
+
+
+              {/* ### Role is currently a problem */}
+
+              <Form.Item name='role' label='Role' 
+              // rules={[{ required: true }]}
+              >
                 <Select
                   defaultValue=""
                   // style={{ width: 120 }}
                   onChange={handleChange}
                   options={[
                     { value: 'user', label: 'User' },
-                    { value: 'admin', label: 'Admin' },
+                    { value: 'admin', label: 'Admin' }
+
+                  ]}
+                />
+              </Form.Item>
+
+
+              <Form.Item name='adminauth' label='AdminAuth' rules={[{ required: true }]}>
+                <Select
+                  defaultValue=""
+                  // style={{ width: 120 }}
+                  onChange={handleChange}
+                  options={[
+                    { value: true, label: 'True' },
+                    { value: false, label: 'False' },
+
+                  ]}
+                />
+              </Form.Item>
+
+              <Form.Item name='userauth' label='PubicAuth' rules={[{ required: true }]}>
+                <Select
+                  defaultValue=""
+                  // style={{ width: 120 }}
+                  onChange={handleChange}
+                  options={[
+                    { value: true, label: 'True' },
+                    { value: false, label: 'False' },
 
                   ]}
                 />
               </Form.Item>
 
               <div className="text-right">
-                <button className="btn1">Edit USER</button>
+                <button className="btn1">Edit USER1</button>
               </div>
             </Form>}
         </Col>

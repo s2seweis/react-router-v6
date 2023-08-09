@@ -5,7 +5,7 @@ import { message } from 'antd';
 export const getCurrentUser = reqObj => async dispatch => {
 
   const bearerToken = JSON.parse(localStorage.getItem('user')); 
-  console.log("Line:1001", bearerToken);
+  // console.log("Line:200", bearerToken);
 
   // const obj = JSON.parse(json);
 
@@ -21,8 +21,8 @@ export const getCurrentUser = reqObj => async dispatch => {
         Authorization: `Bearer ${bearerToken}`,
       },
     });
-    console.log('line:101', response);
-    console.log('line:102', response.data);
+    // console.log('line:201', response);
+    // console.log('line:202', response.data);
     //   localStorage.setItem ('user', JSON.stringify (response.data));
     dispatch({ type: 'GET_CURRENT_USERS', payload: response.data });
     // dispatch ({type: 'GET_CUrrent_USERS', payload: response.data});
@@ -34,7 +34,7 @@ export const getCurrentUser = reqObj => async dispatch => {
     //   window.location.href = '/';
     // }, 500);
   } catch (error) {
-    console.log('line:4');
+    // console.log('line:203');
     message.error(
       'Something went wrong, Not possible to fetch the CurrentUser from the BAckend! '
     );

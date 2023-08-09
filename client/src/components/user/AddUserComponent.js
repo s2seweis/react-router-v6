@@ -16,7 +16,7 @@ function AddUserComponent() {
         console.log("line:60", values);
 
         dispatch(addUser(values))
-        console.log(values)
+        console.log("line:61", values)
     }
 
     // ###
@@ -33,7 +33,7 @@ function AddUserComponent() {
             {loading && (<Spinner />)}
             <Row justify='center mt-5'>
                 <Col lg={12} sm={18} xs={22} className='p-2'>
-                    <Form style={{background:"aliceblue", padding:"15px", borderRadius:"15px", marginTop:"50px"}} className='bs1 p-2' layout='vertical' onFinish={onFinish}>
+                    <Form style={{ background: "aliceblue", padding: "15px", borderRadius: "15px", marginTop: "50px" }} className='bs1 p-2' layout='vertical' onFinish={onFinish}>
                         <h3>Add New User</h3>
                         <hr />
                         <Form.Item name='username' label='User name' rules={[{ required: true }]}>
@@ -48,27 +48,60 @@ function AddUserComponent() {
                         {/* <Form.Item name='role' label='Role' rules={[{ required: true }]}>
                             <Input />
                         </Form.Item> */}
-                        <Form.Item name='role' label='Role' rules={[{ required: true }]}>
+                        {/* <Form.Item name='role' label='Role' rules={[{ required: true }]}>
+                            <Select
+                                defaultValue=""
+                                // style={{ width: 120 }}
+                                onChange={handleChange}
+                                options={[
+                                    { value: 'userRole', label: 'User' },
+                                    { value: 'adminRole', label: 'Admin' }
+
+                                ]}
+                            />
+                        </Form.Item> */}
+
+                        <Form.Item name='role' label='Role'
+                        // rules={[{ required: true }]}
+                        >
                             <Select
                                 defaultValue=""
                                 // style={{ width: 120 }}
                                 onChange={handleChange}
                                 options={[
                                     { value: 'user', label: 'User' },
-                                    { value: 'admin', label: 'Admin' },
-                                   
+                                    { value: 'admin', label: 'Admin' }
+
                                 ]}
                             />
                         </Form.Item>
-                        <Form.Item name='adminauth' label='AdminAuth' rules={[{ required: true }]}>
+
+                        <Form.Item name='adminauth' label='AdminAuth' 
+                        // rules={[{ required: true }]}
+                        >
                             <Select
                                 defaultValue=""
                                 // style={{ width: 120 }}
                                 onChange={handleChange}
                                 options={[
-                                    { value: 'true', label: 'True' },
-                                    { value: 'false', label: 'False' },
-                                   
+                                    { value: true, label: 'True' },
+                                    { value: false, label: 'False' },
+
+                                ]}
+                            />
+                        </Form.Item>
+
+                        <Form.Item name='userauth' label='UserAuth' 
+                        // rules={[{ required: true }]}
+                        >
+                            <Select
+                                defaultValue=""
+                                // style={{ width: 120 }}
+                                onChange={handleChange}
+                                options={[
+                                    { value: true, label: 'True' },
+                                    { value: false, label: 'False' },
+
                                 ]}
                             />
                         </Form.Item>

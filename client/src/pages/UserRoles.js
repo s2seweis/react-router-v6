@@ -36,7 +36,9 @@ function UserRoles() {
     <div>
 
       <div style={{ margin: "15px 0px 0px 15px", display: "flex" }}>
-        <a href="javascript:history.back()">Go Back</a>
+        <button className="btn1">
+          <Link to="/">Go Back</Link>
+        </button>
       </div>
 
       <button className="btn1">
@@ -48,7 +50,7 @@ function UserRoles() {
 
       {/* {loading == true && <Spinner />} */}
 
-      <Row style={{ columnGap: "20px", marginTop: "20px", margin:"20px" }} justify="center" gutter={16}>
+      <Row style={{ columnGap: "20px", marginTop: "20px", margin: "20px" }} justify="center" gutter={16}>
 
         {totalUsers?.map(user => {
           return (

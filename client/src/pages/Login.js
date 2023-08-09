@@ -22,7 +22,7 @@ function Login () {
   function onFinish (values) {
     dispatch (userLogin (values));
 
-    console.log ('line:3', values);
+    // console.log ('line:300', values);
   }
   function onSubmit () {
     dispatch (getCurrentUser());

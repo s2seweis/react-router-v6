@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
     role: {
         type: String,
         // required: [true, "Please add the user role"],
-        unique: [true, "Pick Admin or User"],
+        // unique: [true, "Pick Admin or User"],
     },
     password: {
         type: String,
@@ -36,14 +36,13 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, "Please add the user email"],
     },
-    // ### - add role to the model
-    // role: {
-    //     type: Boolean,
-    //     required: [true, "Please add the user role"],
-    // }
-    // // Only if its added to the model I get the state
+
     
     adminauth: {
+        type: Boolean,
+        // required: [true, "Please add the state"],
+    },
+    userauth: {
         type: Boolean,
         // required: [true, "Please add the state"],
     }

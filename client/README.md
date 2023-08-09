@@ -7,6 +7,7 @@
 ## Display the current state of the user
 
 ## Next:
+1. Be careful about the indexes, can cause problems
 2. Let the Auth run via MongoDB
 3. Using of an (JWT) Auth Token 
 4. Adjust the CSS and HTML

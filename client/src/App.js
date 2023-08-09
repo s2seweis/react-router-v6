@@ -35,7 +35,7 @@ function App () {
   // console.log("line:100", users.role);
 
   const userRole = users.role || "guest";
-  console.log("line:101", userRole);
+  // console.log("line:101", userRole);
 
 
 
@@ -46,7 +46,7 @@ function App () {
 
 
   const admin = users.adminauth || false;
-  console.log("line:102", users.adminauth);
+  // console.log("line:102", users.adminauth);
 
   
   

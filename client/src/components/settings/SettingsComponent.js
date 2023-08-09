@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllSettings } from '../../redux/actions/settingActions';
 import { Col, Row, Divider, DatePicker, Checkbox } from 'antd';
 
+
 // ###
 import { Link } from 'react-router-dom';
 import { Popconfirm, message } from "antd";
@@ -30,9 +31,9 @@ function SettingsComponent() {
       }
     ]
 
-    console.log("line:201", settings2);
+  // console.log("line:500", settings2);
 
-    
+
 
 
 
@@ -45,13 +46,13 @@ function SettingsComponent() {
 
 
   const { settings1 } = useSelector(state => state.settingsReducer);
-  console.log("line:200", settings1);
+  // console.log("line:501", settings1);
 
-  const settingsInitial = 
-  // settings1 
-  // || 
-  settings2
-  console.log("line:202",  settingsInitial);
+  const settingsInitial =
+    // settings1 
+    // || 
+    settings2
+  // console.log("line:502",  settingsInitial);
 
   const { loading } = useSelector(state => state.alertsReducer);
 
@@ -74,15 +75,19 @@ function SettingsComponent() {
     <div>
 
       <div style={{ margin: "15px 0px 0px 15px", display: "flex" }}>
-        <a href="javascript:history.back()">Go Back</a>
+        <button className="btn1">
+          <Link to="/">Go Back</Link>
+        </button>
       </div>
+
+
+
+
 
       <h3 style={{ textAlign: "center" }}>Settings</h3>
 
 
-      {/* <button className="btn1">
-        <Link to="/adduser">ADD USER23</Link>
-      </button> */}
+
 
 
 

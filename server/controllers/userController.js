@@ -96,7 +96,8 @@ const login = asyncHandler(async (req, res) => {
             email: user.email,
             id: user.id,
             role: user.role,
-            adminauth: user.adminauth
+            adminauth: user.adminauth,
+            userauth: user.userauth
           },
         },
         process.env.ACCESS_TOKEN_SECRET,
@@ -131,8 +132,14 @@ const login = asyncHandler(async (req, res) => {
 // #####
 
 const adduser = asyncHandler (async (req, res) => {
-  const {username, email, password, role, adminauth} = req.body;
-  console.log ('line:1', username, email, password, role, adminauth);
+  const {
+    username, 
+    email, 
+    password, 
+    role, 
+    adminauth, 
+    userauth} = req.body;
+  console.log ('line:1', username, email, password, role, adminauth, userauth);
   
   if (!username || !email || !password) {
     res.status (400);
@@ -154,7 +161,8 @@ const adduser = asyncHandler (async (req, res) => {
     email,
     password: hashedPassword,
     role,
-    adminauth
+    adminauth,
+    userauth
   });
   
   // ### - here the use of backtick is correct
@@ -265,17 +273,23 @@ const edituser = asyncHandler (async (req, res) => {
   try {
     const user = await User.findOne ({_id: req.body._id});
     console.log ('line:5', user);
+
     user.username = req.body.username;
     console.log ('line:6', user.username);
+
     user.password = req.body.password;
     console.log ('line:7', user.password);
+
     user.role = req.body.role;
     console.log ('line:8', user.role);
-    // user.roleNew = req.body.roleNew;
-    // console.log("line:59", user.password);
-    user.fuelType = req.body.fuelType;
-    user.rentPerHour = req.body.rentPerHour;
-    user.capacity = req.body.capacity;
+
+    user.adminauth = req.body.adminauth;
+    console.log ('line:9', user.adminauth);
+
+    user.userauth = req.body.userauth;
+    console.log ('line:10', user.userauth);
+  
+    
 
     await user.save ();
 
