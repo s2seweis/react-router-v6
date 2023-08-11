@@ -12,6 +12,7 @@
 3. Using of an (JWT) Auth Token 
 4. Adjust the CSS and HTML
 5. Github/ Working on 2 different work places/ Manage it better!
+6. Work with indexes/ make a tutorial
 
 
 Now: 

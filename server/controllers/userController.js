@@ -1,14 +1,16 @@
-const User = require ('../models/userModel');
-const asyncHandler = require ('express-async-handler');
-const bcrypt = require ('bcrypt');
-const jwt = require ('jsonwebtoken');
+const User = require('../models/userModel');
+const asyncHandler = require('express-async-handler');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const { requestPasswordReset, resetPassword } = require("../service/auth.service")
 
 //@desc Current User Info
 //@route GET /api/users/current
 //@access private
 
-const currentUser = asyncHandler (async (req, res) => {
-  res.json (req.user);
+const currentUser = asyncHandler(async (req, res) => {
+  res.json(req.user);
 });
 
 //@desc Login User
@@ -76,40 +78,40 @@ const currentUser = asyncHandler (async (req, res) => {
 //@access public
 
 const login = asyncHandler(async (req, res) => {
-    const { username, password } = req.body;
-    console.log("Line:300", username, password);
-    if (!username || !password) {
-      res.status(400);
-      throw new Error("All fields are mandatory!");
-    }
-    const user = await User.findOne({ username });
-    console.log("Line:301", user.id);
-    //compare password with hashedpassword
+  const { username, password } = req.body;
+  console.log("Line:300", username, password);
+  if (!username || !password) {
+    res.status(400);
+    throw new Error("All fields are mandatory!");
+  }
+  const user = await User.findOne({ username });
+  console.log("Line:301", user.id);
+  //compare password with hashedpassword
 
-    // ### - sor far its working
+  // ### - sor far its working
 
-    if (user && (await bcrypt.compare(password, user.password))) {
-      const accessToken = jwt.sign(
-        {
-          user: {
-            username: user.username,
-            email: user.email,
-            id: user.id,
-            role: user.role,
-            adminauth: user.adminauth,
-            userauth: user.userauth
-          },
+  if (user && (await bcrypt.compare(password, user.password))) {
+    const accessToken = jwt.sign(
+      {
+        user: {
+          username: user.username,
+          email: user.email,
+          id: user.id,
+          role: user.role,
+          adminauth: user.adminauth,
+          userauth: user.userauth
         },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "1h" }
-        );
-        console.log("Line:302", accessToken);
-      res.status(200).json({ accessToken });
-    } else {
-      res.status(401);
-      throw new Error("Line:303, email or password is not valid");
-    }
-  });
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1h" }
+    );
+    console.log("Line:302", accessToken);
+    res.status(200).json({ accessToken });
+  } else {
+    res.status(401);
+    throw new Error("Line:303, email or password is not valid");
+  }
+});
 
 //@desc Register User
 //@route POST /api/users/register
@@ -131,32 +133,32 @@ const login = asyncHandler(async (req, res) => {
 
 // #####
 
-const adduser = asyncHandler (async (req, res) => {
+const adduser = asyncHandler(async (req, res) => {
   const {
-    username, 
-    email, 
-    password, 
-    role, 
-    adminauth, 
-    userauth} = req.body;
-  console.log ('line:1', username, email, password, role, adminauth, userauth);
-  
+    username,
+    email,
+    password,
+    role,
+    adminauth,
+    userauth } = req.body;
+  console.log('line:1', username, email, password, role, adminauth, userauth);
+
   if (!username || !email || !password) {
-    res.status (400);
-    throw new Error ('All fields are mandatory');
+    res.status(400);
+    throw new Error('All fields are mandatory');
   }
-  
-  const userAvailable = await User.findOne ({email});
+
+  const userAvailable = await User.findOne({ email });
   if (userAvailable) {
-    res.status (400);
-    throw new Error ('User already registered!');
+    res.status(400);
+    throw new Error('User already registered!');
   }
-  
+
   //Hash Password
-  const hashedPassword = await bcrypt.hash (password, 10);
-  console.log ('line:2', hashedPassword);
-  
-  const user = await User.create ({
+  const hashedPassword = await bcrypt.hash(password, 10);
+  console.log('line:2', hashedPassword);
+
+  const user = await User.create({
     username,
     email,
     password: hashedPassword,
@@ -164,60 +166,60 @@ const adduser = asyncHandler (async (req, res) => {
     adminauth,
     userauth
   });
-  
+
   // ### - here the use of backtick is correct
-  console.log ('line:3', `${user}`);
-  
+  console.log('line:3', `${user}`);
+
   if (user) {
-    res.status (201).json ({_id: user.id, email: user.email});
+    res.status(201).json({ _id: user.id, email: user.email });
   } else {
-    res.status (400);
-    throw new Error ('User data is not valid');
+    res.status(400);
+    throw new Error('User data is not valid');
   }
-  
-  res.json ({message: 'Register the user'});
+
+  res.json({ message: 'Register the user' });
 });
 
 // #####
 
 // #####
 
-const register = asyncHandler (async (req, res) => {
-  const {username, email, password} = req.body;
-  console.log ('line:1', username, email, password);
-  
+const register = asyncHandler(async (req, res) => {
+  const { username, email, password } = req.body;
+  console.log('line:1', username, email, password);
+
   if (!username || !email || !password) {
-    res.status (400);
-    throw new Error ('All fields are mandatory');
+    res.status(400);
+    throw new Error('All fields are mandatory');
   }
-  
-  const userAvailable = await User.findOne ({email});
+
+  const userAvailable = await User.findOne({ email });
   if (userAvailable) {
-    res.status (400);
-    throw new Error ('User already registered!');
+    res.status(400);
+    throw new Error('User already registered!');
   }
-  
+
   //Hash Password
-  const hashedPassword = await bcrypt.hash (password, 10);
-  console.log ('line:2', hashedPassword);
-  
-  const user = await User.create ({
+  const hashedPassword = await bcrypt.hash(password, 10);
+  console.log('line:2', hashedPassword);
+
+  const user = await User.create({
     username,
     email,
     password: hashedPassword,
   });
-  
+
   // ### - here the use of backtick is correct
-  console.log ('line:3', `${user}`);
-  
+  console.log('line:3', `${user}`);
+
   if (user) {
-    res.status (201).json ({_id: user.id, email: user.email});
+    res.status(201).json({ _id: user.id, email: user.email });
   } else {
-    res.status (400);
-    throw new Error ('User data is not valid');
+    res.status(400);
+    throw new Error('User data is not valid');
   }
-  
-  res.json ({message: 'Register the user'});
+
+  res.json({ message: 'Register the user' });
 });
 
 // #####
@@ -228,25 +230,25 @@ const register = asyncHandler (async (req, res) => {
 //@desc Get All User
 //@route GET /api/users/getallusers
 
-const getallusers = asyncHandler (async (req, res) => {
+const getallusers = asyncHandler(async (req, res) => {
   try {
-    const users = await User.find ();
-    res.send (users);
+    const users = await User.find();
+    res.send(users);
   } catch (error) {
-    return res.status (400).json (error);
+    return res.status(400).json(error);
   }
 });
 
 //@desc Delete User
 //@route POST /api/users/deleteuser
 
-const deleteuser = asyncHandler (async (req, res) => {
+const deleteuser = asyncHandler(async (req, res) => {
   try {
-    await User.findOneAndDelete ({_id: req.body.userid});
+    await User.findOneAndDelete({ _id: req.body.userid });
 
-    res.send ('User deleted successfully');
+    res.send('User deleted successfully');
   } catch (error) {
-    return res.status (400).json (error);
+    return res.status(400).json(error);
   }
 });
 
@@ -269,35 +271,81 @@ const deleteuser = asyncHandler (async (req, res) => {
 //@desc Not working at the moment!!!
 //@route POST /api/users/edituser
 
-const edituser = asyncHandler (async (req, res) => {
+const edituser = asyncHandler(async (req, res) => {
   try {
-    const user = await User.findOne ({_id: req.body._id});
-    console.log ('line:5', user);
+    const user = await User.findOne({ _id: req.body._id });
+    console.log('line:5', user);
 
     user.username = req.body.username;
-    console.log ('line:6', user.username);
+    console.log('line:6', user.username);
 
     user.password = req.body.password;
-    console.log ('line:7', user.password);
+    console.log('line:7', user.password);
 
     user.role = req.body.role;
-    console.log ('line:8', user.role);
+    console.log('line:8', user.role);
 
     user.adminauth = req.body.adminauth;
-    console.log ('line:9', user.adminauth);
+    console.log('line:9', user.adminauth);
 
     user.userauth = req.body.userauth;
-    console.log ('line:10', user.userauth);
-  
-    
+    console.log('line:10', user.userauth);
 
-    await user.save ();
 
-    res.send ('User details updated successfully');
+
+    await user.save();
+
+    res.send('User details updated successfully');
   } catch (error) {
-    return res.status (400).json (error);
+    return res.status(400).json(error);
+  }
+}
+
+
+);
+
+
+// const example = asyncHandler(async (req, res) => {
+//   try {
+//     const user = await User.findOne({ _id: req.body._id });
+//     console.log('line:5', user);
+
+//     await user.save();
+
+//     res.send('User details updated successfully');
+//   } catch (error) {
+//     return res.status(400).json(error);
+//   }
+// }
+// );
+
+
+// ### - Add: resetPasswordRequestController
+
+const resetPasswordRequestController = asyncHandler(async (req, res) => {
+
+// # need to add requestpasswordReset auth.service
+  try {
+    const requestPasswordResetService = await requestPasswordReset(
+      req.body.email
+    );
+    return res.json(requestPasswordResetService);
+  } catch (error) {
+    return res.status(400).json(error);
   }
 });
+
+const resetPasswordController = async (req, res) => {
+  const resetPasswordService = await resetPassword(
+    req.body.userId,
+    req.body.token,
+    req.body.password
+  );
+  return res.json(resetPasswordService);
+};
+
+
+
 
 module.exports = {
   currentUser,
@@ -307,4 +355,6 @@ module.exports = {
   deleteuser,
   adduser,
   edituser,
+  resetPasswordRequestController,
+  resetPasswordController
 };
