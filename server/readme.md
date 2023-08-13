@@ -19,7 +19,7 @@ Start Express Server: npm start / nodemon server
 - result:
 
 {
-  "link": "localhost://8090/passwordReset?token=9431145a68d5f41628f00010b7ec2e2abdca43e2eadf83df7c730eec6e66020a&id=64d49a1b9b1d87292090cb2c"
+  "link": "localhost:/8090/passwordReset?token=9431145a68d5f41628f00010b7ec2e2abdca43e2eadf83df7c730eec6e66020a&id=64d49a1b9b1d87292090cb2c"
 } -->
 
 

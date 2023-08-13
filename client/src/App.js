@@ -25,6 +25,13 @@ import Animation from './pages/Animation';
 import AddUser from './pages/AddUser';
 // ###
 import EditSetting from './pages/EditSetting';
+// ###
+import ForgotPassword from './pages/ForgotPassword';
+// ###
+import PasswordReset from './pages/PasswordReset';
+// ###
+import ResetLink from './pages/ResetLink';
+// ###
 
 
 
@@ -116,6 +123,9 @@ function App () {
           <Route element={<Login />} exact path="/login" />
           <Route element={<Register />} exact path="/Register" />
           <Route element={<Animation />}  path="/animation" />
+          <Route element={<ForgotPassword />}  path="/forgotpassword" />
+          <Route element={<PasswordReset />}  path="/passwordreset/:token/:id" />
+          <Route element={<ResetLink />}  path="/resetlink" />
 
 
         </Routes>

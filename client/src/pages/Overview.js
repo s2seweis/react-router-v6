@@ -22,6 +22,8 @@ const Login = props => {
           <a href="/register">Register</a>
           <a href="/">Overview</a>
           <a href="/animation">Animation</a>
+          <a href="/forgotpassword">Forgot Password</a>
+          <a href="/resetlink">Reset Link</a>
         </div>
 
         <hr />

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {message} from 'antd';
-import { getCurrentUser } from './currentUserAction';
+import {getCurrentUser} from './currentUserAction';
 
 export const userLogin = reqObj => async dispatch => {
   dispatch ({type: 'LOADING', payload: true});
@@ -13,7 +13,7 @@ export const userLogin = reqObj => async dispatch => {
     // console.log ('line:102', response.data.accessToken);
     localStorage.setItem ('user', JSON.stringify (response.data.accessToken));
     dispatch ({type: 'GET_USERS', payload: response.data});
-    dispatch (getCurrentUser(response.data));
+    dispatch (getCurrentUser (response.data));
     // dispatch ({type: 'GET_CUrrent_USERS', payload: response.data});
     message.success ('Login Success');
     dispatch ({type: 'LOADING', payload: false});
@@ -25,6 +25,59 @@ export const userLogin = reqObj => async dispatch => {
   } catch (error) {
     // console.log ('line:103');
     message.error ('Something went wrong, Password or Username is incorrect! ');
+    dispatch ({type: 'LOADING', payload: false});
+  }
+};
+
+// ### - new
+
+export const requestResetPassword = reqObj => async dispatch => {
+  dispatch ({type: 'LOADING', payload: true});
+
+  // console.log("line:100", reqObj);
+
+  try {
+    const response = await axios.post (
+      '/api/users/requestResetPassword',
+      reqObj
+    );
+    // console.log ('line:101', response);
+    // console.log ('line:102', response.data.accessToken);
+    // dispatch ({type: 'GET_CUrrent_USERS', payload: response.data});
+    message.success ('Go and check your emails for the reset link');
+    setTimeout (() => {
+      window.location.href = '/resetlink';
+    }, 500);
+    dispatch ({type: 'LOADING', payload: false});
+  } catch (error) {
+    // console.log ('line:103');
+    message.error (
+      'Something went wrong, There is no user registered with that email  '
+    );
+    dispatch ({type: 'LOADING', payload: false});
+  }
+};
+
+// ### - new
+
+export const resetPassword = reqObj => async dispatch => {
+  dispatch ({type: 'LOADING', payload: true});
+
+  console.log ('line:1', reqObj);
+
+  try {
+    const response = await axios.post ('/api/users/resetPassword', reqObj);
+    // console.log ('line:101', response);
+    // console.log ('line:102', response.data.accessToken);
+    // dispatch ({type: 'GET_CUrrent_USERS', payload: response.data});
+    message.success ('The Password changed successfully !!');
+    setTimeout (() => {
+      window.location.href = '/login';
+    }, 500);
+    dispatch ({type: 'LOADING', payload: false});
+  } catch (error) {
+    // console.log ('line:103');
+    message.error ('Something went wrong  ');
     dispatch ({type: 'LOADING', payload: false});
   }
 };

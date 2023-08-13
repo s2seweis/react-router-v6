@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Row, Col, Input, Form} from 'antd';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {userLogin} from '../redux/actions/userActions';
+import {requestResetPassword} from '../redux/actions/userActions';
 import Spinner from '../components/Spinner';
 
 // ###
@@ -15,27 +15,32 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 AOS.init ();
 
-function Login () {
+function ForgotPassword () {
   const dispatch = useDispatch ();
   const {loading} = useSelector (state => state.alertsReducer);
 
   function onFinish (values) {
-    dispatch (userLogin (values));
+    dispatch (requestResetPassword (values));
 
     // console.log ('line:300', values);
   }
   function onSubmit () {
-    dispatch (getCurrentUser());
+    dispatch (getCurrentUser ());
   }
 
   // function onclick () {
   //   dispatch(getCurrentUser)
   // }
 
- 
-
   return (
     <div className="login" style={{margin: '100px', padding: '20px'}}>
+
+      <div style={{margin: '15px 0px 0px 15px', display: 'flex'}}>
+        <button className="btn1">
+          <Link to="/">Go Back</Link>
+        </button>
+      </div>
+
       {loading && <Spinner />}
       <Row gutter={16} className="d-flex aligin-items-center">
 
@@ -51,51 +56,21 @@ function Login () {
             className="login-form p-5"
             onFinish={onFinish}
           >
-            <h1>Login</h1>
+            <h1>Reset Password</h1>
+            <h3>Enter your Email for request an resest link</h3>
             <hr />
 
-            <Form.Item
-              name="username"
-              label="Username"
-              rules={[{required: true}]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              name="password"
-              label="Password"
-              rules={[{required: true}]}
-            >
+            <Form.Item name="email" label="Email" rules={[{required: true}]}>
               <Input />
             </Form.Item>
 
             <button style={{marginBottom: '15px'}} className="btn1 mt-2 mb-3">
-              Login
+              Submit
             </button>
 
             <br />
 
-            <div style={{marginBottom: '15px'}}>
-              <Link to="/register">Click here to Register</Link>
-            </div>
-            {/* <br style={{marginBottom:"20px"}} /> */}
-
           </Form>
-
-          {/* ### */}
-          {/* ### Instead of the button the use effect hook should handle to get the current user after the userlogin action was fired */}
-          {/* <button onClick={onSubmit}>
-            Try to get CurrentUser
-          </button> */}
-          {/* ### */}
-
-          <hr style={{marginBottom: '20px'}} />
-          
-          <div style={{marginBottom:"20px"}}><Link to="/forgotpassword">You forgot your Password?</Link></div>
-          <div> <Link to="/">Go to Overview without Authentication</Link></div>
-          
-         
 
         </Col>
 
@@ -105,4 +80,4 @@ function Login () {
   );
 }
 
-export default Login;
+export default ForgotPassword;

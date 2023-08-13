@@ -26,7 +26,7 @@ const requestPasswordReset = async (email) => {
         createdAt: Date.now(),
     }).save();
 
-    const link = `${clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
+    const link = `${clientURL}/passwordreset/${resetToken}/${user._id}`;
 
     sendEmail(
         user.email,

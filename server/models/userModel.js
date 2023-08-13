@@ -45,6 +45,14 @@ const userSchema = mongoose.Schema({
     userauth: {
         type: Boolean,
         // required: [true, "Please add the state"],
+    },
+    userId: {
+        type: String,
+        // required: [true, "Please add the state"],
+    },
+   token: {
+        type: String,
+        // required: [true, "Please add the state"],
     }
     // ### - add role to the model
 }, {
