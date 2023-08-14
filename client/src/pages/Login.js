@@ -35,21 +35,23 @@ function Login () {
  
 
   return (
-    <div className="login" style={{margin: '100px', padding: '20px'}}>
+    <div className="login" style={{margin: '200px auto', padding: '20px', justifyContent:"center"}}>
       {loading && <Spinner />}
-      <Row gutter={16} className="d-flex aligin-items-center">
+      
+      <Row style={{justifyContent:"center", background:"aliceblue", padding:"50px"}} gutter={16} className="d-flex aligin-items-center">
 
-        <Col lg={8} />
+        {/* <Col lg={8} /> */}
 
         <Col
           // style={{marginTop: '100px'}}
-          lg={8}
+          lg={6} md={10} sm={10} style={{width:""}}
           className="text-left p-5"
         >
           <Form
             layout="vertical"
             className="login-form p-5"
             onFinish={onFinish}
+            style={{width:"auto", background:"aliceblue"}}
           >
             <h1>Login</h1>
             <hr />

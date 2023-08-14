@@ -72,7 +72,7 @@ function PasswordResetComponent({match}) {
       </div>
 
       {loading && <Spinner />}
-      <Row justify="center mt-5" style={{marginTop: '25px'}}>
+      <Row justify="center mt-5" style={{marginTop: '25px', justifyContent:"center"}} >
         <Col
           style={{background: 'aliceblue', borderRadius: '10px'}}
           lg={12}

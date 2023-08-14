@@ -33,7 +33,7 @@ function ForgotPassword () {
   // }
 
   return (
-    <div className="login" style={{margin: '100px', padding: '20px'}}>
+    <div className="login" style={{}}>
 
       <div style={{margin: '15px 0px 0px 15px', display: 'flex'}}>
         <button className="btn1">
@@ -41,21 +41,25 @@ function ForgotPassword () {
         </button>
       </div>
 
-      {loading && <Spinner />}
-      <Row gutter={16} className="d-flex aligin-items-center">
+      <div style={{margin:"200px auto", background:"aliceblue", padding:"20px", width:"fit-content", borderRadius:"25px"}}>
 
-        <Col lg={8} />
+
+      {loading && <Spinner />}
+      <Row  gutter={16} className="d-flex aligin-items-center" style={{justifyContent:"center"}}>
+
+        {/* <Col style={{}} lg={8} /> */}
 
         <Col
           // style={{marginTop: '100px'}}
-          lg={8}
+          lg={20} md={20} sm={20} style={{width:""}}
           className="text-left p-5"
-        >
+          >
           <Form
+          // style={{width:"300px"}}
             layout="vertical"
             className="login-form p-5"
             onFinish={onFinish}
-          >
+            >
             <h1>Reset Password</h1>
             <h3>Enter your Email for request an resest link</h3>
             <hr />
@@ -75,6 +79,8 @@ function ForgotPassword () {
         </Col>
 
       </Row>
+
+            </div>
 
     </div>
   );

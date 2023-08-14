@@ -19,22 +19,26 @@ function Register () {
   }
 
   return (
-    <div className="login" style={{margin:"100px", padding:"20px"}}>
+    <div className="login" style={{margin:"200px auto", padding:"20px", width:"100%"}}>
       {loading && <Spinner />}
       <Row
         gutter={16}
         className="d-flex aligin-items-center"
+        style={{justifyContent:"center", background:"aliceblue", padding:"50px"}}
       >
 
-        <Col lg={8} />
+        {/* <Col lg={8} /> */}
 
         <Col 
         // style={{marginTop: '100px'}} 
-        lg={8} className="text-left p-5">
+        lg={6} md={10} sm={10} style={{width:""}} className="text-left p-5">
+
+
           <Form
             layout="vertical"
             className="login-form p-5"
             onFinish={onFinish}
+            style={{width:"100%"}}
           >
             <h1>Register</h1>
             <hr />
@@ -76,6 +80,7 @@ function Register () {
             <br />
 
             <Link  to="/login">Click here to Login</Link>
+            
 
           </Form>
         </Col>

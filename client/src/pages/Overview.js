@@ -15,7 +15,7 @@ const Login = props => {
 
   return (
     <div>
-      <div>
+      <div style={{marginTop:"25px"}}>
         <p>Public Routes</p>
         <div style={{display: 'grid', marginBottom: '25px'}}>
           <a href="/login">Login</a>
