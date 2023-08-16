@@ -11,7 +11,8 @@ const {
     adduser,
     edituser,
     resetPasswordRequestController,
-    resetPasswordController
+    resetPasswordController,
+    googleLogin
 } = require("../controllers/userController");
 
 const validateToken = require("../middleware/validateTokenHandler");
@@ -52,6 +53,10 @@ router.post("/requestResetPassword", resetPasswordRequestController);
 
 // ###
 router.post("/resetPassword", resetPasswordController);
+// ###
+
+// ### - Google
+router.post("/google-login", googleLogin);
 // ###
 
 

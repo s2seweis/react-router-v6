@@ -10,17 +10,68 @@ import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
 
 const Login = props => {
 
+  const [loginData, setLoginData] = useState(
+    localStorage.getItem('loginData')
+      ? JSON.parse(localStorage.getItem('loginData'))
+      : null
+  );
+
+  console.log("line:1", loginData);
+  console.log("line:2", setLoginData);
+
+
+
+
+
+
+
+
 
   // ### - useGoogleLogin
-  const login = useGoogleLogin({
-    onSuccess: codeResponse => console.log("line:443", codeResponse),
-    flow: 'auth-code',
-  });
-  console.log("line:444", login);
-  console.log("line:445");
+
+  const handleLogout = () => {
+    localStorage.removeItem('loginData');
+    setLoginData(null);
+  };
+
+  const handleFailure = async (result) => {
+    console.log("line:3", result);
+  };
+  const handleLogin = async (googleData) => {
+    console.log("line:5", googleData.tokenId);
+    console.log("line:5.1", googleData.credential);
+    const res = await fetch('/api/users/google-login', {
+      method: 'POST',
+      body: JSON.stringify({
+        token: googleData.credential,
+        secret: googleData.clientID
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log("line5.2", res);
+    
+    
+    const decodedData = await res.json();
+    console.log("line:10",decodedData );
+    console.log("line:11",decodedData.name );
+    
+    // const data = await res.json();
 
 
-  // ### - useGoogleLogin
+
+
+    // setLoginData(data);
+    // localStorage.setItem('loginData', JSON.stringify(data));
+    // console.log("line:4", googleData);
+
+  };
+
+
+
+
+
 
   // console.log("line:400", props);
 
@@ -96,33 +147,39 @@ const Login = props => {
         </div>
 
 
+
+
+
+        {/* ### - Google Auth */}
+
+        <div style={{ width: "50%", margin: "auto", marginTop: "75px", display: "flex", justifyContent: "center" }}>
+       
+        {loginData ? (
+            <div>
+              <h3>You logged in as {loginData.email}</h3>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          ) : (
+            <GoogleLogin
+              buttonText="Log in with Google"
+              onSuccess={handleLogin}
+              onFailure={handleFailure}
+              cookiePolicy={'single_host_origin'}
+            />
+          )}
+
+            </div>
+
+
+
+
         {/* ### Google Auth */}
 
-        <div style={{ width: "50%", margin: "auto", marginTop: "75px" }}>
-          <GoogleLogin
-            onSuccess={credentialResponse => {
-              console.log(credentialResponse);
-            }}
-            onError={() => {
-              console.log('Login Failed');
-            }}
-          />
         </div>
-
-        <div style={{ width: "50%", margin: "auto", marginTop: "25px" }}>
-          <button onClick={() => login()}>
-            Sign in with Google 🚀{' '}
-          </button>
-        </div>
-
-
-        {/* ### Google Auth */}
-
       </div>
-    </div>
-  );
-};
+      );
+}
 
-export default Login;
+      export default Login;
 
 

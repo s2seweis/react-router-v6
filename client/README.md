@@ -13,8 +13,8 @@
 4. Adjust the CSS and HTML
 5. Github/ Working on 2 different work places/ Manage it better!
 6. Work with indexes/ make a tutorial
-7. React OAuth2 | Google - https://www.npmjs.com/package/@react-oauth/google
-8. https://www.npmjs.com/package/react-facebook-auth - https://www.npmjs.com/package/react-facebook-auth
+7. npm i @react-oauth/google | 
+8. https://www.youtube.com/watch?v=75aTZq-qoZk
 
 
 Now: 

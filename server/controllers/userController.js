@@ -324,7 +324,7 @@ const edituser = asyncHandler(async (req, res) => {
 
 const resetPasswordRequestController = asyncHandler(async (req, res) => {
 
-// # need to add requestpasswordReset auth.service
+  // # need to add requestpasswordReset auth.service
   try {
     const requestPasswordResetService = await requestPasswordReset(
       req.body.email
@@ -342,7 +342,52 @@ const resetPasswordController = async (req, res) => {
     req.body.password
   );
   return res.json(resetPasswordService);
+
 };
+
+const users = [];
+
+function upsert(array, item) {
+  const i = array.findIndex((_item) => _item.email === item.email);
+  if (i > -1) array[i] = item;
+  else array.push(item);
+}
+
+const googleLogin = asyncHandler(async (req, res) => {
+
+  // # need to add requestpasswordReset auth.service
+  try {
+    console.log('line:1, hi');
+    const { token, secret } = req.body;
+    console.log("line:2", token);
+    console.log("line:2.1", secret);
+
+    let decodedData = jwt.decode(token, secret);
+    console.log("line:3", decodedData);
+    console.log("line:3.1", decodedData.email);
+    console.log("line:3.2", decodedData.name);
+    console.log("line:3.3", decodedData.email_verified);
+
+    // const ticket = await client.verifyIdToken({
+    //   idToken: token,
+    //   audience: process.env.CLIENT_ID,
+    // });
+
+    // const { name, email, picture } = ticket.getPayload();
+
+
+
+    // const { name, email, email_verified } = decodedData.payload();
+    // console.log("line:4", name);
+    // upsert(users, { name, email, email_verified });
+
+    console.log("line:5", decodedData);
+    return res.json(decodedData);
+
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
 
 
 
@@ -356,5 +401,6 @@ module.exports = {
   adduser,
   edituser,
   resetPasswordRequestController,
-  resetPasswordController
+  resetPasswordController,
+  googleLogin
 };
