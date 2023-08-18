@@ -60,6 +60,14 @@ const AnimationOrbit = () => {
                 </li>
 
                 <li>
+                    <ul class="ring-01">
+                        <li><i class="orbit-icon fa fa-git"><FaReact/></i></li>
+                        <li><i class="orbit-icon fa fa-free-code-camp"><BsGithub/></i></li>
+                        <li><i class="orbit-icon fa fa-meetup"><SiFirebase/></i></li>
+                        <li><i class="orbit-icon fa fa-codepen"><AiFillHtml5/></i></li>
+                    </ul>
+                </li>
+                <li>
                     <ul class="ring-0">
                         <li><i class="orbit-icon fa fa-git"><FaReact/></i></li>
                         <li><i class="orbit-icon fa fa-free-code-camp"><BsGithub/></i></li>
