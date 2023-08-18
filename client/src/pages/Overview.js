@@ -1,63 +1,57 @@
-import React, { useState } from 'react';
-import { Navigate, Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useState} from 'react';
+import {Navigate, Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 
-import { getCurrentUser } from '../redux/actions/currentUserAction';
-
+import {getCurrentUser} from '../redux/actions/currentUserAction';
 
 // ### New: Google Auth
 
-import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
+import {GoogleLogin, useGoogleLogin} from '@react-oauth/google';
 
 // ### New: Google Auth
 
 // ### New: Facebook Auth
 
+import FacebookLogin from 'react-facebook-login';
 
-// import FacebookLogin from 'react-facebook-login';
-
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-
+// import FacebookLogin
+//   from 'react-facebook-login/dist/facebook-login-render-props';
 
 // ### New: Facebook Auth
-
 
 const Login = props => {
+  const responseFacebook = response => {
+    console.log (response);
+  };
 
-  const responseFacebook = (response) => {
-    console.log(response);
-  }
+  const dispatch = useDispatch ();
 
-  const dispatch = useDispatch();
-
-
-  const [loginData, setLoginData] = useState(
-    localStorage.getItem('user')
-      ? JSON.parse(localStorage.getItem('user'))
+  const [loginData, setLoginData] = useState (
+    localStorage.getItem ('user')
+      ? JSON.parse (localStorage.getItem ('user'))
       : null
   );
 
-  console.log('line:1', loginData);
-  console.log('line:2', setLoginData);
+  console.log ('line:1', loginData);
+  console.log ('line:2', setLoginData);
 
   // ### - useGoogleLogin
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    setLoginData(null);
+    localStorage.removeItem ('user');
+    setLoginData (null);
   };
 
   const handleFailure = async result => {
-    console.log('line:3', result);
+    console.log ('line:3', result);
   };
 
-
   const handleLogin = async googleData => {
-    console.log('line:4', googleData.tokenId);
-    console.log('line:5', googleData.credential);
-    const res = await fetch('/api/users/google-login', {
+    console.log ('line:4', googleData.tokenId);
+    console.log ('line:5', googleData.credential);
+    const res = await fetch ('/api/users/google-login', {
       method: 'POST',
-      body: JSON.stringify({
+      body: JSON.stringify ({
         token: googleData.credential,
         secret: googleData.clientID,
       }),
@@ -65,44 +59,39 @@ const Login = props => {
         'Content-Type': 'application/json',
       },
     });
-    console.log('line:6', res);
+    console.log ('line:6', res);
 
-    const decodedData = await res.json();
+    const decodedData = await res.json ();
     let test = decodedData;
 
-    localStorage.setItem('user', JSON.stringify(decodedData));
+    localStorage.setItem ('user', JSON.stringify (decodedData));
 
+    console.log ('line:7', decodedData);
+    console.log ('line:8', decodedData.name);
+    console.log ('line:8', decodedData.email);
 
+    dispatch (getCurrentUser (loginData));
 
-    console.log('line:7', decodedData);
-    console.log('line:8', decodedData.name);
-    console.log('line:8', decodedData.email);
-
-    dispatch(getCurrentUser(loginData));
-
-    setTimeout(() => {
+    setTimeout (() => {
       window.location.href = '/';
     }, 500);
-
-
-
   };
 
   // console.log("line:400", props);
 
   // const {users} = useSelector(state=>state.usersReducer)
-  const { users } = useSelector(state => state.currentUserReducer);
+  const {users} = useSelector (state => state.currentUserReducer);
   // console.log("line:401", users);
   // // console.log("line:107", users.auth);
 
   let text = users.username || 'GUEST';
-  let result = text.toUpperCase();
+  let result = text.toUpperCase ();
 
   return (
     <div>
-      <div style={{ marginTop: '25px' }}>
+      <div style={{marginTop: '25px'}}>
         <p>Public Routes</p>
-        <div style={{ display: 'grid', marginBottom: '25px' }}>
+        <div style={{display: 'grid', marginBottom: '25px'}}>
           <a href="/login">Login</a>
           <a href="/register">Register</a>
           <a href="/">Overview</a>
@@ -114,11 +103,11 @@ const Login = props => {
         <hr />
 
         <p>User Routes</p>
-        <div style={{ display: 'grid' }}>
+        <div style={{display: 'grid'}}>
           <Link to="/products">Products</Link>
           <Link to="/start">Start</Link>
         </div>
-        <button onClick={props.handleLoginPublic} style={{ marginTop: '20px' }}>
+        <button onClick={props.handleLoginPublic} style={{marginTop: '20px'}}>
           SignIn User Routes
         </button>
         <button onClick={props.handleLogoutPublic}>SignOut User Routes</button>
@@ -126,13 +115,13 @@ const Login = props => {
 
         <hr />
 
-        <p style={{ marginTop: '0px' }}>Private Routes</p>
-        <div style={{ display: 'grid' }}>
+        <p style={{marginTop: '0px'}}>Private Routes</p>
+        <div style={{display: 'grid'}}>
           <Link to="/admin">Admin</Link>
           <Link to="/settings">Settings</Link>
           <Link to="/settings/roles">User Roles</Link>
         </div>
-        <button onClick={props.handleLoginPrivate} style={{ marginTop: '20px' }}>
+        <button onClick={props.handleLoginPrivate} style={{marginTop: '20px'}}>
           SignIn Private Routes
         </button>
         <button onClick={props.handleLogoutPrivate}>
@@ -142,13 +131,13 @@ const Login = props => {
 
         <hr />
 
-        <h3 style={{ marginTop: '50px' }}>Redirect to the Login Page:</h3>
+        <h3 style={{marginTop: '50px'}}>Redirect to the Login Page:</h3>
 
-        <div style={{ marginTop: '25px' }}>
+        <div style={{marginTop: '25px'}}>
 
           <button
             onClick={() => {
-              localStorage.clear();
+              localStorage.clear ();
               // localStorage.removeItem('user');
               window.location.href = '/login';
             }}
@@ -173,21 +162,19 @@ const Login = props => {
 
           {loginData
             ? <div>
-              <h3>You logged in via {result || "Google"} </h3>
-              <button onClick={handleLogout}>Logout</button>
-            </div>
+                <h3>You logged in via {result || 'Google'} </h3>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
             : <GoogleLogin
-              buttonText="Log in with Google"
-              onSuccess={handleLogin}
-              onFailure={handleFailure}
-              cookiePolicy={'single_host_origin'}
-            />}
+                buttonText="Log in with Google"
+                onSuccess={handleLogin}
+                onFailure={handleFailure}
+                cookiePolicy={'single_host_origin'}
+              />}
 
         </div>
 
-
-        <div style={{ marginTop: "30px" }}>
-
+        <div style={{marginTop: '30px'}}>
 
           {/* <FacebookLogin
             appId="1448062509371972"
@@ -197,15 +184,33 @@ const Login = props => {
           callback={responseFacebook}
           /> */}
 
-
-          <FacebookLogin
+          {/* <FacebookLogin
             appId="1448062509371972"
             autoLoad
             callback={responseFacebook}
             render={renderProps => (
-              <button onClick={renderProps.onClick}>This is my custom FB button</button>
+              <button onClick={renderProps.onClick}>
+                This is my custom FB button
+              </button>
             )}
+          /> */}
+
+          <FacebookLogin
+            appId="1448062509371972"
+            autoLoad={true}
+            fields="name,email,picture"
+            callback={responseFacebook}
+            cssClass="my-facebook-button-class"
+            icon="fa-facebook"
           />
+
+          {/* <FacebookLogin
+            btnContent="LOGIN With Facebook"
+            appId="1448062509371972"
+            fields="name,email,picture"
+            onSuccess={responseFacebook}
+            onFailure={responseFacebook}
+          /> */}
 
         </div>
 
