@@ -7,7 +7,7 @@ const {
   requestPasswordReset,
   resetPassword,
 } = require ('../service/auth.service');
-const { log } = require('handlebars');
+const {log} = require ('handlebars');
 
 //@desc Current User Info
 //@route GET /api/users/current
@@ -331,62 +331,93 @@ const resetPasswordController = async (req, res) => {
   return res.json (resetPasswordService);
 };
 
-const users = [];
-
-function upsert (array, item) {
-  const i = array.findIndex (_item => _item.email === item.email);
-  if (i > -1) array[i] = item;
-  else array.push (item);
-}
-
 const googleLogin = asyncHandler (async (req, res) => {
   // # need to add requestpasswordReset auth.service
   try {
     console.log ('line:1, hi');
     const {token, secret} = req.body;
     console.log ('line:2', token);
-    console.log ('line:2.1', secret);
+    console.log ('line:3', secret);
 
     let decodedData = jwt.decode (token, secret);
-    console.log ('line:3', decodedData);
-    console.log ('line:3.1', decodedData.email);
+    console.log ('line:4', decodedData);
+    console.log ('line:5', decodedData.email);
     let email = decodedData.email;
-  
-
-
 
     const user = await User.findOne ({email});
-    
+    // console.log ('Line:6', user.id);
 
-
-    
-  
-
-    if (!user) {
-
-      
-  
-      // let decodedData = jwt.decode (token, secret);
-      
+    // ### ckecks if no user exists - if not it will create a new user in the database - otherwise it will skip this command
+    if (!user)  {
+      let decodedData = jwt.decode (token, secret);
+      const email = decodedData.email;
+      console.log ('line:6', email);
+      const name = decodedData.name;
+      console.log ('line:7', name);
 
       //   console.log("line:3.2", decodedData);
-        
-        
-      //   const user1 = await User.create ({
-      //     user: decodedData.name,
-      //     email: decodedData.email,
-      //   });
-        
-      //   console.log ('line:3', `${user1}`);
-        
-        console.log("line:3.5, No User found" );
-      }
+
+      const hashedPassword = await bcrypt.hash ("1234", 10);
+      console.log ('line:0', hashedPassword);
+
+      const user1 = await User.create ({
+        username: name,
+        email: email,
+        userauth: true,
+        password: hashedPassword,
+      });
+
+      console.log ('line:8', `${user1}`);
+
+      console.log ('line:999, No User found');
+
       
+
+      const accessToken = jwt.sign (
+        {
+          user: {
+            username: name,
+            email: email,
+            role: 'user',
+            userauth: true,
+          },
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {expiresIn: '1h'}
+      );
+
+      return res.json (accessToken);
+
       
-      
-      console.log("line:3.6", decodedData);
-      return res.json (decodedData);
-    } catch (error) {
+    }
+
+    // ### checks if user exists and if yes it will do the login in and send the auth token to the frontend
+    if (user) {
+      let decodedData = jwt.decode (token, secret);
+      const email = decodedData.email;
+      console.log ('line:10', email);
+      const name = decodedData.name;
+      console.log ('line:11', name);
+
+      const accessToken = jwt.sign (
+        {
+          user: {
+            username: name,
+            email: email,
+            role: 'user',
+            userauth: true,
+          },
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {expiresIn: '1h'}
+      );
+      console.log ('line:1222 - Here is the Auth Token', accessToken);
+      return res.json (accessToken);
+    }
+
+    // console.log ('line:13', decodedData);
+    // return res.json (decodedData);
+  } catch (error) {
     return res.status (400).json (error);
   }
 });

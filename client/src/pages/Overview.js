@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import {Navigate, Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
+import {getCurrentUser} from '../redux/actions/currentUserAction';
+
+
 // ### New: Google Auth
 
 import {GoogleLogin, useGoogleLogin} from '@react-oauth/google';
@@ -11,10 +14,12 @@ import {GoogleLogin, useGoogleLogin} from '@react-oauth/google';
 
 const Login = props => {
 
+  const dispatch = useDispatch ();
+
 
   const [loginData, setLoginData] = useState (
-    localStorage.getItem ('loginData')
-      ? JSON.parse (localStorage.getItem ('loginData'))
+    localStorage.getItem ('user')
+      ? JSON.parse (localStorage.getItem ('user'))
       : null
   );
 
@@ -24,7 +29,7 @@ const Login = props => {
   // ### - useGoogleLogin
 
   const handleLogout = () => {
-    localStorage.removeItem ('loginData');
+    localStorage.removeItem ('user');
     setLoginData (null);
   };
 
@@ -51,21 +56,22 @@ const Login = props => {
     const decodedData = await res.json ();
     let test = decodedData;
 
-    localStorage.setItem ('loginData', JSON.stringify (decodedData));
+    localStorage.setItem ('user', JSON.stringify (decodedData));
 
-    // setTimeout (() => {
-    //   window.location.href = '/';
-    // }, 500);
+    
     
     console.log ('line:7', decodedData);
     console.log ('line:8', decodedData.name);
     console.log ('line:8', decodedData.email);
 
-    // const data = await res.json();
+    dispatch (getCurrentUser (loginData));
 
-    // setLoginData(data);
-    // localStorage.setItem('loginData', JSON.stringify(data));
-    // console.log("line:4", googleData);
+    setTimeout (() => {
+      window.location.href = '/';
+    }, 500);
+
+
+
   };
 
   // console.log("line:400", props);
@@ -153,7 +159,7 @@ const Login = props => {
 
           {loginData
             ? <div>
-                <h3>You logged in as {loginData.email}</h3>
+                <h3>You logged in via {result || "Google"} </h3>
                 <button onClick={handleLogout}>Logout</button>
               </div>
             : <GoogleLogin

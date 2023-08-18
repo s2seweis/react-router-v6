@@ -30,7 +30,7 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, "Please add the user password"],
+        // required: [true, "Please add the user password"],
     },
     email: {
         type: String,
