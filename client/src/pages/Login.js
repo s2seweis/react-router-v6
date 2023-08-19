@@ -5,6 +5,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {userLogin} from '../redux/actions/userActions';
 import Spinner from '../components/Spinner';
 
+import GoogleLoginComponent
+  from '../components/google-login/GoogleLoginComponent';
+
 // ###
 
 import {getCurrentUser} from '../redux/actions/currentUserAction';
@@ -16,6 +19,9 @@ import 'aos/dist/aos.css';
 AOS.init ();
 
 function Login () {
+  const {users} = useSelector (state => state.currentUserReducer);
+  console.log ('line:401', users);
+
   const dispatch = useDispatch ();
   const {loading} = useSelector (state => state.alertsReducer);
 
@@ -25,33 +31,45 @@ function Login () {
     // console.log ('line:300', values);
   }
   function onSubmit () {
-    dispatch (getCurrentUser());
+    dispatch (getCurrentUser ());
   }
 
   // function onclick () {
   //   dispatch(getCurrentUser)
   // }
 
- 
-
   return (
-    <div className="login" style={{margin: '200px auto', padding: '20px', justifyContent:"center"}}>
+    <div
+      className="login"
+      style={{margin: '200px auto', padding: '20px', justifyContent: 'center'}}
+    >
       {loading && <Spinner />}
-      
-      <Row style={{justifyContent:"center", background:"aliceblue", padding:"50px"}} gutter={16} className="d-flex aligin-items-center">
+
+      <Row
+        style={{
+          justifyContent: 'center',
+          background: 'aliceblue',
+          padding: '50px',
+        }}
+        gutter={16}
+        className="d-flex aligin-items-center"
+      >
 
         {/* <Col lg={8} /> */}
 
         <Col
           // style={{marginTop: '100px'}}
-          lg={6} md={10} sm={10} style={{width:""}}
+          lg={6}
+          md={10}
+          sm={10}
+          style={{width: ''}}
           className="text-left p-5"
         >
           <Form
             layout="vertical"
             className="login-form p-5"
             onFinish={onFinish}
-            style={{width:"auto", background:"aliceblue"}}
+            style={{width: 'auto', background: 'aliceblue'}}
           >
             <h1>Login</h1>
             <hr />
@@ -85,6 +103,8 @@ function Login () {
 
           </Form>
 
+          <GoogleLoginComponent users={users} />
+
           {/* ### */}
           {/* ### Instead of the button the use effect hook should handle to get the current user after the userlogin action was fired */}
           {/* <button onClick={onSubmit}>
@@ -93,11 +113,11 @@ function Login () {
           {/* ### */}
 
           <hr style={{marginBottom: '20px'}} />
-          
-          <div style={{marginBottom:"20px"}}><Link to="/forgotpassword">You forgot your Password?</Link></div>
+
+          <div style={{marginBottom: '20px'}}>
+            <Link to="/forgotpassword">You forgot your Password?</Link>
+          </div>
           <div> <Link to="/">Go to Overview without Authentication</Link></div>
-          
-         
 
         </Col>
 

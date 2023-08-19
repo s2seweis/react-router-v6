@@ -331,8 +331,9 @@ const resetPasswordController = async (req, res) => {
   return res.json (resetPasswordService);
 };
 
+// ### - new
+
 const googleLogin = asyncHandler (async (req, res) => {
-  // # need to add requestpasswordReset auth.service
   try {
     console.log ('line:1, hi');
     const {token, secret} = req.body;
@@ -348,7 +349,7 @@ const googleLogin = asyncHandler (async (req, res) => {
     // console.log ('Line:6', user.id);
 
     // ### ckecks if no user exists - if not it will create a new user in the database - otherwise it will skip this command
-    if (!user)  {
+    if (!user) {
       let decodedData = jwt.decode (token, secret);
       const email = decodedData.email;
       console.log ('line:6', email);
@@ -357,7 +358,7 @@ const googleLogin = asyncHandler (async (req, res) => {
 
       //   console.log("line:3.2", decodedData);
 
-      const hashedPassword = await bcrypt.hash ("1234", 10);
+      const hashedPassword = await bcrypt.hash ('1234', 10);
       console.log ('line:0', hashedPassword);
 
       const user1 = await User.create ({
@@ -370,8 +371,6 @@ const googleLogin = asyncHandler (async (req, res) => {
       console.log ('line:8', `${user1}`);
 
       console.log ('line:999, No User found');
-
-      
 
       const accessToken = jwt.sign (
         {
@@ -387,8 +386,6 @@ const googleLogin = asyncHandler (async (req, res) => {
       );
 
       return res.json (accessToken);
-
-      
     }
 
     // ### checks if user exists and if yes it will do the login in and send the auth token to the frontend
@@ -422,6 +419,92 @@ const googleLogin = asyncHandler (async (req, res) => {
   }
 });
 
+const facebookLogin = asyncHandler (async (req, res) => {
+  try {
+    console.log ('line:1, hi');
+    const {userfacebook} = req.body;
+    console.log ('line:2', userfacebook);
+    console.log ('line:3', userfacebook.name);
+    console.log ('line:4', userfacebook.email);
+    let email = userfacebook.email;
+    console.log("line:5", email);
+
+    // let decodedData = jwt.decode (token, secret);
+    // console.log ('line:4', decodedData);
+    // console.log ('line:5', decodedData.email);
+    // let email = decodedData.email;
+
+    const user = await User.findOne ({email});
+    // console.log ('Line:6', user.id);
+
+    // ### ckecks if no user exists - if not it will create a new user in the database - otherwise it will skip this command
+
+    if (!user) {
+     
+
+      const hashedPassword = await bcrypt.hash ('1234', 10);
+      console.log ('line:7', hashedPassword);
+
+      const user1 = await User.create ({
+        username: userfacebook.name,
+        email: userfacebook.email,
+        userauth: true,
+        password: hashedPassword,
+      });
+
+      console.log ('line:8', `${user1}`);
+
+      console.log ('line:9, We created a new account for you!');
+
+      const accessToken = jwt.sign (
+        {
+          user: {
+            username: userfacebook.name,
+            email: userfacebook.email,
+            role: 'user',
+            userauth: true,
+          },
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {expiresIn: '1h'}
+      );
+
+      return res.json (accessToken);
+    }
+
+    // ### checks if user exists and if yes it will do the login in and send the auth token to the frontend
+    // if (user) {
+    //   let decodedData = jwt.decode (token, secret);
+    //   const email = decodedData.email;
+    //   console.log ('line:10', email);
+    //   const name = decodedData.name;
+    //   console.log ('line:11', name);
+
+    //   const accessToken = jwt.sign (
+    //     {
+    //       user: {
+    //         username: name,
+    //         email: email,
+    //         role: 'user',
+    //         userauth: true,
+    //       },
+    //     },
+    //     process.env.ACCESS_TOKEN_SECRET,
+    //     {expiresIn: '1h'}
+    //   );
+    //   console.log ('line:1222 - Here is the Auth Token', accessToken);
+    //   return res.json (accessToken);
+    // }
+
+    // console.log ('line:13', decodedData);
+    // return res.json (decodedData);
+  } catch (error) {
+    return res.status (400).json (error);
+  }
+});
+
+// ### - new
+
 module.exports = {
   currentUser,
   login,
@@ -433,4 +516,5 @@ module.exports = {
   resetPasswordRequestController,
   resetPasswordController,
   googleLogin,
+  facebookLogin
 };

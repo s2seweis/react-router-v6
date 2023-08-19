@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AnimationOrbit from '../components/orbit'
+import AnimationOrbit from '../components/orbit/Orbit'
 
 const Animation = () => {
     return (
