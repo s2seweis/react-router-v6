@@ -90,7 +90,7 @@ const Login = props => {
             icon="fa-facebook"
           /> */}
 
-          <FacebookLoginComponent />
+          {/* <FacebookLoginComponent users={users} /> */}
 
         </div>
 

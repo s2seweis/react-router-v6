@@ -473,31 +473,30 @@ const facebookLogin = asyncHandler (async (req, res) => {
     }
 
     // ### checks if user exists and if yes it will do the login in and send the auth token to the frontend
-    // if (user) {
-    //   let decodedData = jwt.decode (token, secret);
-    //   const email = decodedData.email;
-    //   console.log ('line:10', email);
-    //   const name = decodedData.name;
-    //   console.log ('line:11', name);
+    if (user) {
+  
+      const accessToken = jwt.sign (
+        {
+          user: {
+            username: userfacebook.name,
+            email: userfacebook.email,
+            role: 'user',
+            userauth: true,
+          },
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {expiresIn: '1h'}
+      );
 
-    //   const accessToken = jwt.sign (
-    //     {
-    //       user: {
-    //         username: name,
-    //         email: email,
-    //         role: 'user',
-    //         userauth: true,
-    //       },
-    //     },
-    //     process.env.ACCESS_TOKEN_SECRET,
-    //     {expiresIn: '1h'}
-    //   );
-    //   console.log ('line:1222 - Here is the Auth Token', accessToken);
-    //   return res.json (accessToken);
-    // }
+      console.log("line:11", accessToken);
+
+      console.log ('line:12, We send the Access Token to the Front End!');
+      // console.log ('line:1222 - Here is the Auth Token', accessToken);
+      return res.json (accessToken);
+    }
 
     // console.log ('line:13', decodedData);
-    // return res.json (decodedData);
+    return res.json (decodedData);
   } catch (error) {
     return res.status (400).json (error);
   }

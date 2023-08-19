@@ -3,7 +3,7 @@ import FacebookLogin from 'react-facebook-login';
 import {getCurrentUser} from '../../redux/actions/currentUserAction';
 import {useDispatch, useSelector} from 'react-redux';
 
-function FacebookLoginComponent () {
+function FacebookLoginComponent (users) {
   const dispatch = useDispatch ();
 
   const [loginData, setLoginData] = useState (
@@ -11,6 +11,17 @@ function FacebookLoginComponent () {
       ? JSON.parse (localStorage.getItem ('user'))
       : null
   );
+
+  const handleLogout = () => {
+    localStorage.removeItem ('user');
+    localStorage.clear ();
+    setLoginData (null);
+    setTimeout (() => {
+        window.location.href = '/';
+      }, 500);  };
+
+
+  console.log ('line:0', loginData);
 
   const responseFacebook = async response => {
     console.log ('line:1', response);
@@ -35,46 +46,31 @@ function FacebookLoginComponent () {
 
     dispatch (getCurrentUser (loginData));
 
-    // setTimeout (() => {
-    //   window.location.href = '/';
-    // }, 500);
+    setTimeout (() => {
+      window.location.href = '/';
+    }, 500);
   };
 
-  //   const handleLogin = async googleData => {
-  //     console.log ('line:4', googleData.tokenId);
-  //     console.log ('line:5', googleData.credential);
-  //     const res = await fetch ('/api/users/google-login', {
-  //       method: 'POST',
-  //       body: JSON.stringify ({
-  //         token: googleData.credential,
-  //         secret: googleData.clientID,
-  //       }),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     console.log ('line:6', res);
 
-  //     const decodedData = await res.json ();
-  //     let test = decodedData;
 
-  //     localStorage.setItem ('user', JSON.stringify (decodedData));
-
-  //     console.log ('line:7', decodedData);
-  //     console.log ('line:8', decodedData.name);
-  //     console.log ('line:8', decodedData.email);
-
-  //     dispatch (getCurrentUser (loginData));
-
-  //     // setTimeout (() => {
-  //     //   window.location.href = '/';
-  //     // }, 500);
-  //   };
+  let text = users.users.username || 'GUEST';
+  let result = text.toUpperCase ();
 
   return (
-    <div className="spinner">
-      <h3> FacebookLogin </h3>
-      <FacebookLogin
+    <div style={{display:"flex", justifyContent:"center", margin:"20px auto"}} className="">
+
+
+
+      {loginData
+        ? <div style={{textAlign:"center"}}>
+            <h3 >
+              You have an other account? 
+              {/* { result || 'Google'}{' '} */}
+            </h3>
+            {/* <button onClick={handleLogout}>Logout</button> */}
+          </div>
+        : 
+        <FacebookLogin
         appId="1448062509371972"
         autoLoad={false}
         fields="name,email,picture"
@@ -82,6 +78,9 @@ function FacebookLoginComponent () {
         cssClass="my-facebook-button-class"
         icon="fa-facebook"
       />
+          }
+
+   
     </div>
   );
 }

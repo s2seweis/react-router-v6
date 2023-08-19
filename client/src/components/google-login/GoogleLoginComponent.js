@@ -2,9 +2,6 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getCurrentUser} from '../../redux/actions/currentUserAction';
 
-
-
-
 import {GoogleLogin} from '@react-oauth/google';
 
 function GoogleLoginComponent (users) {
@@ -22,8 +19,12 @@ function GoogleLoginComponent (users) {
 
   const handleLogout = () => {
     localStorage.removeItem ('user');
+    localStorage.clear ();
     setLoginData (null);
-  };
+    setTimeout (() => {
+        window.location.href = '/login';
+      }, 500);  
+    };
 
   const handleFailure = async result => {
     console.log ('line:3', result);
@@ -55,10 +56,9 @@ function GoogleLoginComponent (users) {
 
     dispatch (getCurrentUser (loginData));
 
-    // setTimeout (() => {
-    //   window.location.href = '/';
-    // }, 500);
-
+    setTimeout (() => {
+      window.location.href = '/';
+    }, 500);
   };
 
   let text = users.users.username || 'GUEST';
@@ -73,9 +73,9 @@ function GoogleLoginComponent (users) {
 
       <div
         style={{
-          width: '50%',
-          margin: 'auto',
-          marginTop: '75px',
+          // width: '50%',
+          margin: '25px auto',
+          // marginTop: '75px',
           display: 'flex',
           justifyContent: 'center',
         }}
@@ -83,10 +83,7 @@ function GoogleLoginComponent (users) {
 
         {loginData
           ? <div>
-              <h3>You logged in via 
-                {
-                result || 
-                'Google'} </h3>
+              
               <button onClick={handleLogout}>Logout</button>
             </div>
           : <GoogleLogin

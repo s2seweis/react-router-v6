@@ -7,8 +7,8 @@ import Spinner from '../components/Spinner';
 
 import GoogleLoginComponent
   from '../components/google-login/GoogleLoginComponent';
-
 // ###
+import FacebookLoginComponent from '../components/google-login/FacebookLoginComponent';
 
 import {getCurrentUser} from '../redux/actions/currentUserAction';
 
@@ -104,6 +104,7 @@ function Login () {
           </Form>
 
           <GoogleLoginComponent users={users} />
+          <FacebookLoginComponent users={users} />
 
           {/* ### */}
           {/* ### Instead of the button the use effect hook should handle to get the current user after the userlogin action was fired */}
