@@ -8,7 +8,7 @@ import Settings from './pages/Settings';
 import Start from './pages/Start';
 import Products from './pages/Products';
 import Login from './pages/Login';
-import Overview from './pages/Overview';
+import Overview from './pages/Overview/Overview';
 import Register from './pages/Register';
 import PrivateRoutes from './utils/PrivateRoutes';
 import PublicRoutes from './utils/PublicRoutes';
@@ -50,7 +50,7 @@ function AppRouter() {
     };
 
     return (
-        <div className="AppRouter">
+        <div style={{display:"flex", justifyContent:"center"}} className="AppRouter">
             <Router>
                 <Routes>
                     <Route element={<PublicRoutes user={publicUser} />}>
