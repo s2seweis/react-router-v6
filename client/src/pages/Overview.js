@@ -8,8 +8,8 @@ const Login = props => {
   let result = text.toUpperCase ();
 
   return (
-    <div>
-      <div style={{marginTop: '25px'}}>
+    <div style={{backgroundColor:"#fafafa"}}>
+      <div style={{marginTop: ''}}>
         <p>Public Routes</p>
         <div style={{display: 'grid', marginBottom: '25px'}}>
           <a href="/login">Login</a>
@@ -45,8 +45,8 @@ const Login = props => {
         </button>
         <p>#Logged in status Private Routes: {props.privateUser}</p>
         <hr />
-        <h3 style={{marginTop: '50px'}}>Redirect to the Login Page:</h3>
-        <div style={{marginTop: '25px'}}>
+        <h3 style={{marginTop: '10px'}}>Redirect to the Login Page:</h3>
+        <div style={{marginTop: '15px', marginBottom:"15px"}}>
           <button
             onClick={() => {
               localStorage.clear ();

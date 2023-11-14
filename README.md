@@ -1,5 +1,10 @@
 # Project Overview: React Router V6
 
+<div align="center">
+<img src="assets/Router-1.png" alt="Example Image">
+<img src="assets/Router-4.png" alt="Example Image">
+</div>
+
 ## Client
 ### Technologies Used
 
@@ -69,3 +74,8 @@ Feel free to explore the individual directories for detailed documentation on ea
 For any issues or inquiries, please contact [weissenborn.sebastian@gmail.com].
 
 Happy coding! 🚀
+
+<div align="center">
+<img src="assets/Router-3.png" alt="Example Image">
+<img src="assets/Router-2.png" alt="Example Image">
+</div>

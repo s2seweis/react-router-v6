@@ -56,3 +56,7 @@
 p{
   line-break: anywhere;
 }
+
+body{
+  background-color: #fafafa !important;
+}
