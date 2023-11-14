@@ -186,7 +186,7 @@ const googleLogin = asyncHandler (async (req, res) => {
             username: name,
             email: email,
             role: 'user',
-            userauth: true,
+            userauth: 'true',
           },
         },
         process.env.ACCESS_TOKEN_SECRET,

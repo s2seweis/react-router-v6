@@ -1,18 +1,21 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import PropTypes from 'prop-types';  // Import PropTypes
+// Overview.js
 
-const Overview = props => {
-  const {users} = useSelector (state => state.currentUserReducer);
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import './Overview.css';
+
+const Overview = (props) => {
+  const { users } = useSelector((state) => state.currentUserReducer);
   let text = users.username || 'GUEST';
-  let result = text.toUpperCase ();
+  let result = text.toUpperCase();
 
   return (
-    <div style={{backgroundColor:'#fafafa'}}>
-      <div style={{marginTop: ''}}>
+    <div className="container">
+      <div className="public-routes section">
         <p>Public Routes</p>
-        <div style={{display: 'grid', marginBottom: '25px'}}>
+        <div className="grid-container">
           <a href="/login">Login</a>
           <a href="/register">Register</a>
           <a href="/">Overview</a>
@@ -20,35 +23,46 @@ const Overview = props => {
           <a href="/forgotpassword">Forgot Password</a>
           <a href="/resetlink">Reset Link</a>
         </div>
-        <hr />
+        <hr className="hr" />
+      </div>
+
+      <div className="user-routes section">
         <p>User Routes</p>
-        <div style={{display: 'grid'}}>
+        <div className="grid-container">
           <Link to="/products">Products</Link>
           <Link to="/start">Start</Link>
         </div>
-        <button onClick={props.handleLoginPublic} style={{marginTop: '20px'}}>
+        <button className="button" onClick={props.handleLoginPublic}>
           SignIn User Routes
         </button>
-        <button onClick={props.handleLogoutPublic}>SignOut User Routes</button>
-        <p>#Logged in status User Routes: {props.publicUser}</p>
-        <hr />
-        <p style={{marginTop: '0px'}}>Private Routes</p>
-        <div style={{display: 'grid'}}>
+        <button className="button" onClick={props.handleLogoutPublic}>
+          SignOut User Routes
+        </button>
+        <p className="status">#Logged in status User Routes: {props.publicUser}</p>
+        <hr className="hr" />
+      </div>
+
+      <div className="private-routes section">
+        <p>Private Routes</p>
+        <div className="grid-container">
           <Link to="/admin">Admin</Link>
           <Link to="/settings">Settings</Link>
           <Link to="/settings/roles">User Roles</Link>
         </div>
-        <button onClick={props.handleLoginPrivate} style={{marginTop: '20px'}}>
+        <button className="button" onClick={props.handleLoginPrivate}>
           SignIn Private Routes
         </button>
-        <button onClick={props.handleLogoutPrivate}>
+        <button className="button" onClick={props.handleLogoutPrivate}>
           SignOut Private Routes
         </button>
-        <p>#Logged in status Private Routes: {props.privateUser}</p>
-        <hr />
-        <h3 style={{marginTop: '10px'}}>Redirect to the Login Page:</h3>
-        <div style={{marginTop: '15px', marginBottom:'15px'}}>
-          <button
+        <p className="status">#Logged in status Private Routes: {props.privateUser}</p>
+        <hr className="hr" />
+      </div>
+
+      <div className="redirect section">
+        <h3>Redirect to the Login Page:</h3>
+        <div className="logout-button">
+        <button
             onClick={() => {
               localStorage.clear ();
               // localStorage.removeItem('user');
@@ -58,8 +72,7 @@ const Overview = props => {
             Logout {result}
           </button>
         </div>
-        <div style={{marginTop: '30px'}}>
-        </div>
+        <div style={{ marginTop: '30px' }}></div>
       </div>
     </div>
   );
