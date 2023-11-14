@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const validateToken = asyncHandler(async (req, res, next) => {
   let token;
   let authHeader = req.headers.Authorization || req.headers.authorization;
-  console.log("Line:2", authHeader);
   if (authHeader.startsWith("Bearer")) {
     token = authHeader.split(" ")[1];
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
@@ -12,7 +11,6 @@ const validateToken = asyncHandler(async (req, res, next) => {
         res.status(401);
         throw new Error("Line:1, User is not authorized");
       }
-      console.log("Line:599",decoded.user );
       req.user = decoded.user;
       next();
     });

@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router();
-const User = require("../models/userModel")
+// const User = require("../models/userModel")
 
 const {
     currentUser,
@@ -18,53 +18,17 @@ const {
 
 const validateToken = require("../middleware/validateTokenHandler");
 
-// ### - import the logic from the controller
 router.post("/login", login);
-// ###
-
-// ### - import the logic from controller
 router.get("/current", validateToken, currentUser);
-// ###
-
-// ###
 router.post("/register", register);
-// ###
-
-// ###
 router.get("/getallusers", getallusers);
-// ###
-
-// ###
 router.post("/deleteuser", deleteuser);
-// ###
-
-// ###
 router.post("/adduser", adduser);
-// ###
-
-// ###
 router.post("/edituser", edituser);
-// ###
-
-// # Add Reset Passwort
-
-// ###
 router.post("/requestResetPassword", resetPasswordRequestController);
-// ###
-
-// ###
 router.post("/resetPassword", resetPasswordController);
-// ###
-
-// ### - Google
 router.post("/google-login", googleLogin);
-// ###
-
-// ### - Google
 router.post("/facebook-login", facebookLogin);
-// ###
-
-
 
 module.exports = router;
 

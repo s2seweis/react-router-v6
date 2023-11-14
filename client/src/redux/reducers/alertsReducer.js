@@ -1,5 +1,3 @@
-
-
 const initialData = {
     loading : false
   };

@@ -45,20 +45,11 @@ import { BsStackOverflow } from "react-icons/bs";
 
 const AnimationOrbit = () => {
     return (
-
-
-
-
-
-
         <div class="orbit">
-
             <ul class="orbit-wrap">
-
                 <li class="orbit-center">
                     <i class="orbit-center__icon fa fa-code"><BsStackOverflow/></i>
                 </li>
-
                 <li>
                     <ul class="ring-01">
                         <li><i class="orbit-icon fa fa-git"><FaReact/></i></li>
@@ -102,15 +93,8 @@ const AnimationOrbit = () => {
                         <li><i class="orbit-icon fa fa-heart-o"><AiOutlineLineChart/></i></li>
                     </ul>
                 </li>
-
             </ul>
-
         </div>
-
-
-
-
-
     )
 }
 

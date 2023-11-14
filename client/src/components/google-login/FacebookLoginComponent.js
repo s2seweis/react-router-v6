@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import FacebookLogin from 'react-facebook-login';
 import {getCurrentUser} from '../../redux/actions/currentUserAction';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 function FacebookLoginComponent (users) {
   const dispatch = useDispatch ();
@@ -20,11 +20,7 @@ function FacebookLoginComponent (users) {
         window.location.href = '/';
       }, 500);  };
 
-
-  console.log ('line:0', loginData);
-
   const responseFacebook = async response => {
-    console.log ('line:1', response);
 
     const res = await fetch ('/api/users/facebook-login', {
       method: 'POST',
@@ -36,11 +32,8 @@ function FacebookLoginComponent (users) {
       },
     });
 
-    console.log ('line:6', res);
-
     const decodedData = await res.json ();
     let test = decodedData;
-    console.log ('line:7', decodedData);
 
     localStorage.setItem ('user', JSON.stringify (decodedData));
 
@@ -51,15 +44,11 @@ function FacebookLoginComponent (users) {
     }, 500);
   };
 
-
-
   let text = users.users.username || 'GUEST';
-  let result = text.toUpperCase ();
+  // let result = text.toUpperCase ();
 
   return (
     <div style={{display:"flex", justifyContent:"center", margin:"20px auto"}} className="">
-
-
 
       {loginData
         ? <div style={{textAlign:"center"}}>
@@ -79,8 +68,6 @@ function FacebookLoginComponent (users) {
         icon="fa-facebook"
       />
           }
-
-   
     </div>
   );
 }

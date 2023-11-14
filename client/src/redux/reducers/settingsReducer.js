@@ -10,9 +10,7 @@ const initialData = {
           "role": "master of the universe",
           "username": "John Doe"
         }
-
       ],
-
 };
 
 export const settingsReducer = (state=initialData , action)=>{
@@ -25,9 +23,6 @@ export const settingsReducer = (state=initialData , action)=>{
                 settings1 : action.payload
             }
         }
-
-         
-         
          default:return state
      }
 

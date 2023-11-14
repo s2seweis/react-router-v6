@@ -1,20 +1,9 @@
-import React, {useState} from 'react';
-import {Navigate, Link} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import FacebookLoginComponent
-  from '../components/google-login/FacebookLoginComponent';
-
-// ### New: Facebook Auth
-// import FacebookLogin from 'react-facebook-login';
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 const Login = props => {
-  // const responseFacebook = response => {
-  //   console.log (response);
-  // };
-
   const {users} = useSelector (state => state.currentUserReducer);
-  console.log ('line:401', users);
-
   let text = users.username || 'GUEST';
   let result = text.toUpperCase ();
 
@@ -30,9 +19,7 @@ const Login = props => {
           <a href="/forgotpassword">Forgot Password</a>
           <a href="/resetlink">Reset Link</a>
         </div>
-
         <hr />
-
         <p>User Routes</p>
         <div style={{display: 'grid'}}>
           <Link to="/products">Products</Link>
@@ -43,9 +30,7 @@ const Login = props => {
         </button>
         <button onClick={props.handleLogoutPublic}>SignOut User Routes</button>
         <p>#Logged in status User Routes: {props.publicUser}</p>
-
         <hr />
-
         <p style={{marginTop: '0px'}}>Private Routes</p>
         <div style={{display: 'grid'}}>
           <Link to="/admin">Admin</Link>
@@ -59,13 +44,9 @@ const Login = props => {
           SignOut Private Routes
         </button>
         <p>#Logged in status Private Routes: {props.privateUser}</p>
-
         <hr />
-
         <h3 style={{marginTop: '50px'}}>Redirect to the Login Page:</h3>
-
         <div style={{marginTop: '25px'}}>
-
           <button
             onClick={() => {
               localStorage.clear ();
@@ -74,26 +55,10 @@ const Login = props => {
             }}
           >
             Logout {result}
-
           </button>
-
         </div>
-
         <div style={{marginTop: '30px'}}>
-
-          {/* <FacebookLogin
-            appId="1448062509371972"
-            autoLoad={true}
-            fields="name,email,picture"
-            callback={responseFacebook}
-            cssClass="my-facebook-button-class"
-            icon="fa-facebook"
-          /> */}
-
-          {/* <FacebookLoginComponent users={users} /> */}
-
         </div>
-
       </div>
     </div>
   );

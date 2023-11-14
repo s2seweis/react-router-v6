@@ -1,10 +1,8 @@
-import { Col, Row, Form, Input, Select, Space } from 'antd'
 import React from 'react'
+import { Col, Row, Form, Input, Select } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../Spinner'
 import { addUser } from '../../redux/actions/displayUserActions'
-
-// needs the  user.user state otherwise it will be redirected to landing page
 
 function AddUserComponent() {
 
@@ -12,18 +10,11 @@ function AddUserComponent() {
     const { loading } = useSelector(state => state.alertsReducer)
 
     function onFinish(values) {
-
-        console.log("line:60", values);
-
         dispatch(addUser(values))
-        console.log("line:61", values)
     }
 
-    // ###
     const handleChange = (value) => {
-        console.log(`selected ${value}`);
     };
-    // ###
 
     return (
         <div>
@@ -45,28 +36,11 @@ function AddUserComponent() {
                         <Form.Item name='password' label='Password' rules={[{ required: true }]}>
                             <Input />
                         </Form.Item>
-                        {/* <Form.Item name='role' label='Role' rules={[{ required: true }]}>
-                            <Input />
-                        </Form.Item> */}
-                        {/* <Form.Item name='role' label='Role' rules={[{ required: true }]}>
-                            <Select
-                                defaultValue=""
-                                // style={{ width: 120 }}
-                                onChange={handleChange}
-                                options={[
-                                    { value: 'userRole', label: 'User' },
-                                    { value: 'adminRole', label: 'Admin' }
-
-                                ]}
-                            />
-                        </Form.Item> */}
 
                         <Form.Item name='role' label='Role'
-                        // rules={[{ required: true }]}
                         >
                             <Select
                                 defaultValue=""
-                                // style={{ width: 120 }}
                                 onChange={handleChange}
                                 options={[
                                     { value: 'user', label: 'User' },
@@ -76,12 +50,10 @@ function AddUserComponent() {
                             />
                         </Form.Item>
 
-                        <Form.Item name='adminauth' label='AdminAuth' 
-                        // rules={[{ required: true }]}
+                        <Form.Item name='adminauth' label='AdminAuth'
                         >
                             <Select
                                 defaultValue=""
-                                // style={{ width: 120 }}
                                 onChange={handleChange}
                                 options={[
                                     { value: true, label: 'True' },
@@ -90,13 +62,10 @@ function AddUserComponent() {
                                 ]}
                             />
                         </Form.Item>
-
-                        <Form.Item name='userauth' label='UserAuth' 
-                        // rules={[{ required: true }]}
+                        <Form.Item name='userauth' label='UserAuth'
                         >
                             <Select
                                 defaultValue=""
-                                // style={{ width: 120 }}
                                 onChange={handleChange}
                                 options={[
                                     { value: true, label: 'True' },
@@ -105,12 +74,9 @@ function AddUserComponent() {
                                 ]}
                             />
                         </Form.Item>
-
-
                         <div className='text-right'>
                             <button className='btn1'>ADD USER</button>
                         </div>
-
                     </Form>
                 </Col>
             </Row>

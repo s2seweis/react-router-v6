@@ -30,6 +30,9 @@
 9. **Manage User Roles**
    - Implementing a user role management system to control and customize user access and permissions.
 
+10. **Reset Password**
+   - Send an Email with Nodemailer, for request a new Password.
+
 ---
 
 ## Server

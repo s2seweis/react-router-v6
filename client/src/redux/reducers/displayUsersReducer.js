@@ -13,9 +13,6 @@ export const displayUsersReducer = (state=initialData , action)=>{
                 users1 : action.payload
             }
         }
-
-         
-         
          default:return state
      }
 
