@@ -1,7 +1,7 @@
 import React from 'react';
 import EditUserComponent from '../components/user/EditUserComponent';
 
-function EditUser({ match }) {
+function EditUser() {
   
   return (
     <div>

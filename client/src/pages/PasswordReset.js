@@ -1,6 +1,7 @@
+import React from 'react';
 import PasswordResetComponent from '../components/password-reset/PasswordResetComponent';
 
-function PasswordReset({ match }) {
+function PasswordReset() {
   return (
     <div>
       <PasswordResetComponent/>

@@ -3,13 +3,14 @@ import {useDispatch} from 'react-redux';
 import {getCurrentUser} from '../../redux/actions/currentUserAction';
 import {GoogleLogin} from '@react-oauth/google';
 
-function GoogleLoginComponent (users) {
+function GoogleLoginComponent () {
+// function GoogleLoginComponent (users) {
   const dispatch = useDispatch ();
 
   const [loginData, setLoginData] = useState (
     localStorage.getItem ('user')
       ? JSON.parse (localStorage.getItem ('user'))
-      : null
+      : null,
   );
 
   const handleLogout = () => {
@@ -21,7 +22,8 @@ function GoogleLoginComponent (users) {
       }, 500);  
     };
 
-  const handleFailure = async result => {
+  const handleFailure = async () => {
+  // const handleFailure = async (result) => {
   };
 
   const handleLogin = async googleData => {
@@ -46,8 +48,8 @@ function GoogleLoginComponent (users) {
     }, 500);
   };
 
-  let text = users.users.username || 'GUEST';
-  let result = text.toUpperCase ();
+  // let text = users.users.username || 'GUEST';
+  // let result = text.toUpperCase ();
 
   return (
     <div className="">

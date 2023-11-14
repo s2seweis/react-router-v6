@@ -19,6 +19,5 @@ root.render(
       <App />
     </PersistGate>
   </Provider>
-  </GoogleOAuthProvider>
+  </GoogleOAuthProvider>,
 );
-

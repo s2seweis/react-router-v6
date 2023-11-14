@@ -1,14 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import PropTypes from 'prop-types';  // Import PropTypes
 
-const Login = props => {
+const Overview = props => {
   const {users} = useSelector (state => state.currentUserReducer);
   let text = users.username || 'GUEST';
   let result = text.toUpperCase ();
 
   return (
-    <div style={{backgroundColor:"#fafafa"}}>
+    <div style={{backgroundColor:'#fafafa'}}>
       <div style={{marginTop: ''}}>
         <p>Public Routes</p>
         <div style={{display: 'grid', marginBottom: '25px'}}>
@@ -46,7 +47,7 @@ const Login = props => {
         <p>#Logged in status Private Routes: {props.privateUser}</p>
         <hr />
         <h3 style={{marginTop: '10px'}}>Redirect to the Login Page:</h3>
-        <div style={{marginTop: '15px', marginBottom:"15px"}}>
+        <div style={{marginTop: '15px', marginBottom:'15px'}}>
           <button
             onClick={() => {
               localStorage.clear ();
@@ -64,4 +65,13 @@ const Login = props => {
   );
 };
 
-export default Login;
+Overview.propTypes = {
+  handleLoginPublic: PropTypes.func.isRequired,
+  handleLogoutPublic: PropTypes.func.isRequired,
+  publicUser: PropTypes.string.isRequired,
+  handleLoginPrivate: PropTypes.func.isRequired,
+  handleLogoutPrivate: PropTypes.func.isRequired,
+  privateUser: PropTypes.string.isRequired,
+};
+
+export default Overview;

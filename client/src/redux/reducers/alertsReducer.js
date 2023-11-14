@@ -1,5 +1,5 @@
 const initialData = {
-    loading : false
+    loading : false,
   };
   
   export const alertsReducer=(state=initialData , action)=>{
@@ -9,11 +9,11 @@ const initialData = {
           case 'LOADING' : {
               return{
                   ...state,
-                  loading : action.payload
-              }
+                  loading : action.payload,
+              };
           }
   
-          default : return state
+          default : return state;
     }
   
-  }
+  };

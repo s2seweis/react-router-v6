@@ -10,12 +10,10 @@ export const usersReducer = (state=initialData , action)=>{
          case 'GET_USERS' : {
              return{
                  ...state,
-                 users : action.payload
-             }
+                 users : action.payload,
+             };
          }
-         default:return state
+         default:return state;
      }
 
-}
-
-
+};

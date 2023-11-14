@@ -1,30 +1,30 @@
-import React from 'react'
-import { Col, Row, Form, Input, Select } from 'antd'
-import { useDispatch, useSelector } from 'react-redux'
-import Spinner from '../Spinner'
-import { addUser } from '../../redux/actions/displayUserActions'
+import React from 'react';
+import { Col, Row, Form, Input, Select } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../Spinner';
+import { addUser } from '../../redux/actions/displayUserActions';
 
 function AddUserComponent() {
 
-    const dispatch = useDispatch()
-    const { loading } = useSelector(state => state.alertsReducer)
+    const dispatch = useDispatch();
+    const { loading } = useSelector(state => state.alertsReducer);
 
     function onFinish(values) {
-        dispatch(addUser(values))
+        dispatch(addUser(values));
     }
 
-    const handleChange = (value) => {
+    const handleChange = () => {
     };
 
     return (
         <div>
-            <div style={{ margin: "15px 0px 0px 15px", display: "flex" }}>
+            <div style={{ margin: '15px 0px 0px 15px', display: 'flex' }}>
                 <a href="javascript:history.back()">Go Back</a>
             </div>
             {loading && (<Spinner />)}
             <Row justify='center mt-5'>
                 <Col lg={12} sm={18} xs={22} className='p-2'>
-                    <Form style={{ background: "aliceblue", padding: "15px", borderRadius: "15px", marginTop: "50px" }} className='bs1 p-2' layout='vertical' onFinish={onFinish}>
+                    <Form style={{ background: 'aliceblue', padding: '15px', borderRadius: '15px', marginTop: '50px' }} className='bs1 p-2' layout='vertical' onFinish={onFinish}>
                         <h3>Add New User</h3>
                         <hr />
                         <Form.Item name='username' label='User name' rules={[{ required: true }]}>
@@ -44,7 +44,7 @@ function AddUserComponent() {
                                 onChange={handleChange}
                                 options={[
                                     { value: 'user', label: 'User' },
-                                    { value: 'admin', label: 'Admin' }
+                                    { value: 'admin', label: 'Admin' },
 
                                 ]}
                             />
@@ -82,7 +82,7 @@ function AddUserComponent() {
             </Row>
 
         </div>
-    )
+    );
 }
 
-export default AddUserComponent
+export default AddUserComponent;

@@ -1,5 +1,7 @@
 // import './AppRouter.css';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Admin from './pages/Admin';
 import UserRoles from './pages/UserRoles';
 import Settings from './pages/Settings';
@@ -8,11 +10,8 @@ import Products from './pages/Products';
 import Login from './pages/Login';
 import Overview from './pages/Overview';
 import Register from './pages/Register';
-import 'antd/dist/antd.min.css';
 import PrivateRoutes from './utils/PrivateRoutes';
 import PublicRoutes from './utils/PublicRoutes';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import EditUser from './pages/EditUser';
 import Animation from './pages/Animation';
 import AddUser from './pages/AddUser';
@@ -20,10 +19,10 @@ import EditSetting from './pages/EditSetting';
 import ForgotPassword from './pages/ForgotPassword';
 import PasswordReset from './pages/PasswordReset';
 import ResetLink from './pages/ResetLink';
+import 'antd/dist/antd.min.css';
 
 function AppRouter() {
-
-    const { users } = useSelector(state => state.currentUserReducer)
+    const { users } = useSelector(state => state.currentUserReducer);
     // const userRole = users.role || "guest";
     const user = users.userauth || false;
     const admin = users.adminauth || false;
@@ -39,6 +38,7 @@ function AppRouter() {
         e.preventDefault();
         setPublicUser(false);
     };
+
     const handleLoginPrivate = e => {
         e.preventDefault();
         setPrivateUser(true);
@@ -48,6 +48,7 @@ function AppRouter() {
         e.preventDefault();
         setPrivateUser(false);
     };
+
     return (
         <div className="AppRouter">
             <Router>

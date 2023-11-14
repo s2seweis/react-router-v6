@@ -1,7 +1,7 @@
 import React from 'react';
 import EditSettingsComponent from '../components/settings/EditSettingsComponent';
 
-function EditSetting({ match }) {
+function EditSetting() {
   
   return (
     <div>

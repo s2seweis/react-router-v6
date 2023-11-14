@@ -26,7 +26,7 @@ export const requestResetPassword = reqObj => async dispatch => {
   try {
     const response = await axios.post (
       '/api/users/requestResetPassword',
-      reqObj
+      reqObj,
     );
     message.success ('Go and check your emails for the reset link');
     setTimeout (() => {
@@ -35,7 +35,7 @@ export const requestResetPassword = reqObj => async dispatch => {
     dispatch ({type: 'LOADING', payload: false});
   } catch (error) {
     message.error (
-      'Something went wrong, There is no user registered with that email  '
+      'Something went wrong, There is no user registered with that email',
     );
     dispatch ({type: 'LOADING', payload: false});
   }
@@ -70,7 +70,7 @@ export const userRegister = reqObj => async dispatch => {
     dispatch ({type: 'LOADING', payload: false});
   } catch (error) {
     message.error (
-      'Something went wrong, maybe the email is registered already under an other account!'
+      'Something went wrong, maybe the email is registered already under an other account!',
     );
     dispatch ({type: 'LOADING', payload: false});
   }

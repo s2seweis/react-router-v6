@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row, Form, Input, Select, Space } from 'antd';
+import { Col, Row, Form, Input, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '../Spinner';
 import { editUser, getAllUsers } from '../../redux/actions/displayUserActions';
-
 import { useParams } from 'react-router-dom';
 
-function EditUserComponent({ match }) {
+function EditUserComponent() {
 
   let { userid } = useParams();
   const { users1 } = useSelector(state => state.displayUsersReducer);
@@ -24,36 +23,35 @@ function EditUserComponent({ match }) {
         setuser(users1.find(o => o._id == userid));
       }
     },
-    [users1]
+    [users1],
   );
 
   function onFinish(values) {
     values._id = user._id;
-
     dispatch(editUser(values));
   }
 
-  const handleChange = (value) => {
+  const handleChange = () => {
   };
 
   return (
     <div
     >
-      <div style={{ margin: "15px 0px 0px 15px", display: "flex" }}>
+      <div style={{ margin: '15px 0px 0px 15px', display: 'flex' }}>
         <a href="javascript:history.back()">Go Back</a>
       </div>
       {loading && <Spinner />}
-      <Row justify="center mt-5" style={{ marginTop: "25px" }}>
-        <Col style={{ background: "aliceblue", borderRadius: "10px" }} lg={12} sm={20} xs={22} className="p-2">
+      <Row justify="center mt-5" style={{ marginTop: '25px' }}>
+        <Col style={{ background: 'aliceblue', borderRadius: '10px' }} lg={12} sm={20} xs={22} className="p-2">
           {totalusers.length > 0 &&
             <Form
               initialValues={user}
               className="bs1 p-2"
               layout="vertical"
               onFinish={onFinish}
-              style={{ marginTop: "50px", background: "aliceblue", padding: "15px", borderRadius: "15px" }}
+              style={{ marginTop: '50px', background: 'aliceblue', padding: '15px', borderRadius: '15px' }}
             >
-              <h3>Edit User1</h3>
+              <h3>Edit User10</h3>
               <hr />
               <Form.Item
                 name="username"
@@ -69,14 +67,13 @@ function EditUserComponent({ match }) {
               >
                 <Input />
               </Form.Item>
-              <Form.Item name='role' label='Role'
-              >
+              <Form.Item name='role' label='Role'>
                 <Select
                   defaultValue=""
                   onChange={handleChange}
                   options={[
                     { value: 'user', label: 'User' },
-                    { value: 'admin', label: 'Admin' }
+                    { value: 'admin', label: 'Admin' },
 
                   ]}
                 />

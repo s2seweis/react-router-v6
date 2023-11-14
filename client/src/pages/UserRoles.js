@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers, deleteUser } from '../redux/actions/displayUserActions';
-import { Col, Row } from 'antd';
-import { Link } from 'react-router-dom';
 // Revisit it again Popconfirm
-import { Popconfirm } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Col, Row, Popconfirm } from 'antd';
+import { Link } from 'react-router-dom';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 // import Spinner from '../components/Spinner';
 
 function UserRoles() {
@@ -22,24 +21,24 @@ function UserRoles() {
     () => {
       setTotalUsers(users1);
     },
-    [users1]
+    [users1],
   );
 
   return (
     <div>
-      <div style={{ margin: "15px 0px 0px 15px", display: "flex" }}>
-        <div style={{ margin: "15px 0px 0px 15px", display: "flex" }}>
-          <a href="javascript:history.back()">Go Back</a>
+      <div style={{ margin: '15px 0px 0px 15px', display: 'flex' }}>
+        <div style={{ margin: '15px 0px 0px 15px', display: 'flex' }}>
+          <a href='javascript:history.back()'>Go Back</a>
         </div>
       </div>
-      <button className="btn1">
-        <Link to="/adduser">ADD USER</Link>
+      <button className='btn1'>
+        <Link to='/adduser'>ADD USER</Link>
       </button>
       {/* {loading == true && <Spinner />} */}
-      <Row style={{ columnGap: "20px", marginTop: "20px", margin: "20px" }} justify="center" gutter={16}>
+      <Row style={{ columnGap: '20px', marginTop: '20px', margin: '20px' }} justify='center' gutter={16}>
         {totalUsers?.map(user => {
           return (
-            <Col style={{ background: "aliceblue", padding: "10px", marginBottom: "20px", borderRadius: "20px" }}
+            <Col key={totalUsers._id} style={{ background: 'aliceblue', padding: '10px', marginBottom: '20px', borderRadius: '20px' }}
             >
               <div >
                 <div>
@@ -53,21 +52,21 @@ function UserRoles() {
                     <h4>Id:</h4>
                     <p>{user._id}</p>
                   </div>
-                  <div className="mr-4" style={{ display: "flex", justifyContent: "space-around" }}>
+                  <div className='mr-4' style={{ display: 'flex', justifyContent: 'space-around' }}>
                     <Link to={`/edituser/${user._id}`}>
                       <EditOutlined
-                        className="mr-3"
-                        style={{ color: "green", cursor: "progress" }}
+                        className='mr-3'
+                        style={{ color: 'green', cursor: 'progress' }}
                       />
                     </Link>
                     <Popconfirm
-                      title="Are you sure to delete this car?"
-                      onConfirm={() => { dispatch(deleteUser({ userid: user._id })) }}
-                      okText="Yes"
-                      cancelText="No"
+                      title='Are you sure to delete this car?'
+                      onConfirm={() => { dispatch(deleteUser({ userid: user._id })); }}
+                      okText='Yes'
+                      cancelText='No'
                     >
                       <DeleteOutlined
-                        style={{ color: "red", cursor: "progress" }}
+                        style={{ color: 'red', cursor: 'progress' }}
                       />
                     </Popconfirm>
                   </div>

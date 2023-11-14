@@ -10,12 +10,10 @@ export const currentUserReducer = (state=initialData , action)=>{
          case 'GET_CURRENT_USERS' : {
              return{
                  ...state,
-                 users : action.payload
-             }
+                 users : action.payload,
+             };
          }
-         default:return state
+         default:return state;
      }
 
-}
-
-
+};

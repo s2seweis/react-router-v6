@@ -1,15 +1,13 @@
 import React from 'react';
-import {Col, Row, Form, Input, Select, Space} from 'antd';
+import {Col, Row, Form, Input} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import Spinner from '../Spinner';
 import {resetPassword} from '../../redux/actions/userActions';
-
 import {useParams} from 'react-router-dom';
 
-function PasswordResetComponent({match}) {
+function PasswordResetComponent() {
   let {token, id} = useParams ();
-
-  const initialValues = {"token":token, "userId":id}
+  const initialValues = {'token':token, 'userId':id};
   const dispatch = useDispatch ();
   const {loading} = useSelector (state => state.alertsReducer);
 
@@ -23,7 +21,7 @@ function PasswordResetComponent({match}) {
         <a href="/">Go Back</a>
       </div>
       {loading && <Spinner />}
-      <Row justify="center mt-5" style={{marginTop: '25px', justifyContent:"center"}} >
+      <Row justify="center mt-5" style={{marginTop: '25px', justifyContent:'center'}} >
         <Col
           style={{background: 'aliceblue', borderRadius: '10px'}}
           lg={12}

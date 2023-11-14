@@ -10,12 +10,10 @@ export const displayUsersReducer = (state=initialData , action)=>{
         case 'GET_ALL_USERS' : {
             return{
                 ...state,
-                users1 : action.payload
-            }
+                users1 : action.payload,
+            };
         }
-         default:return state
+         default:return state;
      }
 
-}
-
-
+};

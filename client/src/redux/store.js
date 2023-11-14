@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
-import {combineReducers} from "redux";
+import {combineReducers} from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import { alertsReducer } from './reducers/alertsReducer';
@@ -14,9 +14,9 @@ const rootReducer = combineReducers({
    usersReducer,
    displayUsersReducer,
    settingsReducer,
-   currentUserReducer
+   currentUserReducer,
 
-})
+});
 
 const persistConfig = {
     key: 'root',
@@ -28,7 +28,7 @@ const store = configureStore({
     reducer: persistedReducer,
     
     devTools: process.env.NODE_ENV !== 'production',
-    middleware: [thunk]
+    middleware: [thunk],
 });
 
 export default store;
