@@ -18,7 +18,7 @@ function Register() {
   }
 
   return (
-    <div className='login' style={{ margin: 'auto', padding: '20px', width: '100%' }}>
+    <div className='login' style={{ margin: 'auto', padding: '20px', minWidth:'350px' }}>
       {loading && <Spinner />}
       <Row
         gutter={16}
@@ -26,7 +26,7 @@ function Register() {
         style={{ justifyContent: 'center', background: 'aliceblue', padding: '50px' }}
       >
         <Col
-          lg={6} md={10} sm={10} style={{ width: '' }} className='text-left p-5'>
+          lg={6} md={10} sm={10} style={{ minWidth:'100%'}} className='text-left p-5'>
           <Form
             layout='vertical'
             className='login-form p-5'

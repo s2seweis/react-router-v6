@@ -39,7 +39,7 @@ function Login() {
           lg={6}
           md={10}
           sm={10}
-          style={{ width: '' }}
+          style={{ minWidth:'100%' }}
           className="text-left p-5"
         >
           <Form
