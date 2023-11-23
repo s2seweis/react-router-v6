@@ -2,7 +2,7 @@
     "name": "your-app",
     "version": "1.0.0",
     "scripts": {
-      "start": "cd server && node server.js"
+        "start": "node server/server.js"
     },
     "dependencies": {},
     "devDependencies": {},
